@@ -210,6 +210,7 @@ svg {
 
 table {
   border-collapse: collapse;
+
 }
 
 caption {
@@ -10401,7 +10402,7 @@ a:focus {
 
 .sidebar .nav-item .collapse .collapse-inner .collapse-item:active,
 .sidebar .nav-item .collapsing .collapse-inner .collapse-item:active {
-  background-color: #dddfeb;
+  background-color: #dddfeb; 
 }
 
 .sidebar .nav-item .collapse .collapse-inner .collapse-item.active,

@@ -9,11 +9,15 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 
-	<title>SB Admin 2 - Dashboard</title>
+	<title>Quản lý nhân sự American English</title>
 
 	<!-- Custom fonts for this template-->
 	<link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 	<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+	
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" rel="stylesheet">
 
 	<!-- Custom styles for this template-->
 	<link href="../css/sb-admin-2.min.css" rel="stylesheet">
@@ -26,124 +30,131 @@
     <div id="wrapper">
 
 		<!-- Sidebar -->
-		<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
+		<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion;" id="accordionSidebar">
+		<div style="background-color: #2C3D57;">
 			<!-- Sidebar - Brand -->
-			<a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-				<div class="sidebar-brand-icon rotate-n-15">
-					<i class="fas fa-laugh-wink"></i>
-				</div>
-				<div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
-			</a>
-
-			<!-- Divider -->
-			<hr class="sidebar-divider my-0">
-
-			<!-- Nav Item - Dashboard -->
-			<li class="nav-item active">
-				<a class="nav-link" href="index.html">
-					<i class="fas fa-fw fa-tachometer-alt"></i>
-					<span>Dashboard</span></a>
-			</li>
-
-			<!-- Divider -->
-			<hr class="sidebar-divider">
-
-			<!-- Heading -->
-			<div class="sidebar-heading">
-				Interface
-			</div>
-
-			<!-- Nav Item - Pages Collapse Menu -->
-			<li class="nav-item">
-				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-					<i class="fas fa-fw fa-cog"></i>
-					<span>Components</span>
-				</a>
-				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-					<div class="bg-white py-2 collapse-inner rounded">
-						<h6 class="collapse-header">Custom Components:</h6>
-						<a class="collapse-item" href="buttons.html">Buttons</a>
-						<a class="collapse-item" href="cards.html">Cards</a>
+			<div style="background-color: #2C3D57;"> 
+				<a class="sidebar-brand d-flex align-items-center justify-content-center" href="main.php" style="margin-bottom: 50px;">
+					<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px;">
+						<div style="text-transform: uppercase; font-size: 80px; font-family: 'Sorts Mill Goudy', serif; margin-top: 20px;">AE</div>
+						<div style="font-size: 9px; text-align: left; margin-left: 5px; color: white;">the &star; American English School in An Giang</div>
 					</div>
-				</div>
-			</li>
-
-			<!-- Nav Item - Utilities Collapse Menu -->
-			<li class="nav-item">
-				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-					<i class="fas fa-fw fa-wrench"></i>
-					<span>Utilities</span>
 				</a>
-				<div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-					<div class="bg-white py-2 collapse-inner rounded">
-						<h6 class="collapse-header">Custom Utilities:</h6>
-						<a class="collapse-item" href="utilities-color.html">Colors</a>
-						<a class="collapse-item" href="utilities-border.html">Borders</a>
-						<a class="collapse-item" href="utilities-animation.html">Animations</a>
-						<a class="collapse-item" href="utilities-other.html">Other</a>
+			</div>
+			
+			<!-- Bảng lề trái quản lý nhân viên-->
+			
+				<!-- Divider -->
+				<hr class="sidebar-divider my-0">
+
+				<!-- Nav Item - Dashboard -->
+				<li class="nav-item active">
+					<a class="nav-link" href="index.html">
+						<i class="fas fa-fw fa-tachometer-alt"></i>
+						<span>Tổng quan</span></a>
+				</li>
+
+				<!-- Divider -->
+				<hr class="sidebar-divider my-0">
+
+				<!-- Nav Item - Pages Collapse Menu -->
+				<li class="nav-item">
+					<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseNhanVien" aria-expanded="true" aria-controls="collapseNhanVien">
+						<i class="bi bi-person-fill"></i>
+						<span>Nhân viên</span>
+					</a>
+					<div id="collapseNhanVien" class="collapse" aria-labelledby="headingNhanVien" data-parent="#accordionSidebar">
+						<div class="bg-white py-2 collapse-inner rounded">
+							<a class="collapse-item" href="">Danh sách nhân viên</a>
+							<a class="collapse-item" href="">Phòng ban</a>
+							<a class="collapse-item" href="">Loại nhân viên</a>
+							<a class="collapse-item" href="">Chức vụ</a>
+							<a class="collapse-item" href="">Trình độ</a>
+							<a class="collapse-item" href="">Chuyên môn</a>
+							<a class="collapse-item" href="">Bằng cấp</a>
+						</div>
 					</div>
-				</div>
-			</li>
+				</li>
+				<!-- Divider -->
+				<hr class="sidebar-divider my-0">
 
-			<!-- Divider -->
-			<hr class="sidebar-divider">
+				<!-- Nav Item - Utilities Collapse Menu -->
+				<li class="nav-item">
+					<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLuong" aria-expanded="true" aria-controls="collapseLuong">
+						<i class="bi bi-cash-coin"></i>
+						<span>Lương</span>
+					</a>
+					<div id="collapseLuong" class="collapse" aria-labelledby="headingLuong" data-parent="#accordionSidebar">
+						<div class="bg-white py-2 collapse-inner rounded">
+							<a class="collapse-item" href="">Bảng tính lương</a>
+							<a class="collapse-item" href="">Tính lương</a>
 
-			<!-- Heading -->
-			<div class="sidebar-heading">
-				Addons
-			</div>
-
-			<!-- Nav Item - Pages Collapse Menu -->
-			<li class="nav-item">
-				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-					<i class="fas fa-fw fa-folder"></i>
-					<span>Pages</span>
-				</a>
-				<div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-					<div class="bg-white py-2 collapse-inner rounded">
-						<h6 class="collapse-header">Login Screens:</h6>
-						<a class="collapse-item" href="login.html">Login</a>
-						<a class="collapse-item" href="register.html">Register</a>
-						<a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-						<div class="collapse-divider"></div>
-						<h6 class="collapse-header">Other Pages:</h6>
-						<a class="collapse-item" href="404.html">404 Page</a>
-						<a class="collapse-item" href="blank.html">Blank Page</a>
+						</div>
 					</div>
+				</li>
+
+				<!-- Divider -->
+				<hr class="sidebar-divider my-0">
+
+				<!-- Nav Item - Pages Collapse Menu -->
+				<li class="nav-item">
+					<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+						<i class="bi bi-person-bounding-box"></i>
+						<span>Công tác</span>
+					</a>
+					<div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+						<div class="bg-white py-2 collapse-inner rounded">
+							<a class="collapse-item" href="">Danh sách công tác</a>
+							<a class="collapse-item" href="">Tạo công tác</a>
+						</div>
+					</div>
+				</li>
+				
+				<!-- Divider -->
+				<hr class="sidebar-divider my-0">
+
+				<!-- Nav Item - Charts -->
+				<li class="nav-item">
+					<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseGroup" aria-expanded="true" aria-controls="collapseGroup">
+						<i class="bi bi-people-fill"></i>
+						<span>Nhóm nhân viên</span>
+					</a>
+					<div id="collapseGroup" class="collapse" aria-labelledby="headingGroup" data-parent="#accordionSidebar">
+						<div class="bg-white py-2 collapse-inner rounded">
+							<a class="collapse-item" href="">Danh sách nhóm</a>
+							<a class="collapse-item" href="">Tạo nhóm</a>
+						</div>
+					</div>
+				</li>
+
+				<!-- Divider -->
+				<hr class="sidebar-divider my-0">
+
+				<!-- Nav Item - Tables -->
+				<li class="nav-item">
+					<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAccount" aria-expanded="true" aria-controls="collapseAccount">
+						<i class="bi bi-gear-fill"></i>
+						<span>Tài khoản</span>
+					</a>
+					<div id="collapseAccount" class="collapse" aria-labelledby="headingAccount" data-parent="#accordionSidebar">
+						<div class="bg-white py-2 collapse-inner rounded">
+							<a class="collapse-item" href="">Danh tài khoản</a>
+							<a class="collapse-item" href="">Tạo tài khoản</a>
+						</div>
+					</div>
+				</li>
+			
+	
+				<!-- Divider -->
+				<hr class="sidebar-divider d-none d-md-block">
+
+				<!-- Sidebar Toggler (Sidebar) -->
+				<div class=" d-none d-md-inline"style="margin-left: 30px;">
+					<button class="rounded-circle border-0" id="sidebarToggle"></button>
 				</div>
-			</li>
 
-			<!-- Nav Item - Charts -->
-			<li class="nav-item">
-				<a class="nav-link" href="charts.html">
-					<i class="fas fa-fw fa-chart-area"></i>
-					<span>Charts</span></a>
-			</li>
 
-			<!-- Nav Item - Tables -->
-			<li class="nav-item">
-				<a class="nav-link" href="tables.html">
-					<i class="fas fa-fw fa-table"></i>
-					<span>Tables</span></a>
-			</li>
-
-			<!-- Divider -->
-			<hr class="sidebar-divider d-none d-md-block">
-
-			<!-- Sidebar Toggler (Sidebar) -->
-			<div class="text-center d-none d-md-inline">
-				<button class="rounded-circle border-0" id="sidebarToggle"></button>
-			</div>
-
-			<!-- Sidebar Message -->
-			<div class="sidebar-card d-none d-lg-flex">
-				<img class="sidebar-card-illustration mb-2" src="../img/undraw_rocket.svg" alt="...">
-				<p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
-				<a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
-			</div>
-
-		</ul>
+			</ul>
 	
 	<!-- End of Sidebar -->
 
