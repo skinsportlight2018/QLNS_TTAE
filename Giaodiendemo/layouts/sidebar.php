@@ -1,3 +1,7 @@
+<?php 
+ // connect database
+ require_once('../config.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,7 +18,7 @@
 	<!-- Custom fonts for this template-->
 	<link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 	<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-	
+
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" rel="stylesheet">
@@ -27,23 +31,23 @@
 <body id="page-top">
 
 	<!-- Page Wrapper -->
-    <div id="wrapper">
+	<div id="wrapper">
 
 		<!-- Sidebar -->
 		<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion;" id="accordionSidebar">
-		<div style="background-color: #2C3D57;">
-			<!-- Sidebar - Brand -->
-			<div style="background-color: #2C3D57;"> 
-				<a class="sidebar-brand d-flex align-items-center justify-content-center" href="main.php" style="margin-bottom: 50px;">
-					<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px;">
-						<div style="text-transform: uppercase; font-size: 80px; font-family: 'Sorts Mill Goudy', serif; margin-top: 20px;">AE</div>
-						<div style="font-size: 9px; text-align: left; margin-left: 5px; color: white;">the &star; American English School in An Giang</div>
-					</div>
-				</a>
-			</div>
-			
-			<!-- Bảng lề trái quản lý nhân viên-->
-			
+			<div style="background-color: #2C3D57;">
+				<!-- Sidebar - Brand -->
+				<div style="background-color: #2C3D57;">
+					<a class="sidebar-brand d-flex align-items-center justify-content-center" href="main.php" style="margin-bottom: 50px;">
+						<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px;">
+							<div style="text-transform: uppercase; font-size: 80px; font-family: 'Sorts Mill Goudy', serif; margin-top: 20px;">AE</div>
+							<div style="font-size: 9px; text-align: left; margin-left: 5px; color: white;">the &star; American English School in An Giang</div>
+						</div>
+					</a>
+				</div>
+
+				<!-- Bảng lề trái quản lý nhân viên-->
+
 				<!-- Divider -->
 				<hr class="sidebar-divider my-0">
 
@@ -65,7 +69,9 @@
 					</a>
 					<div id="collapseNhanVien" class="collapse" aria-labelledby="headingNhanVien" data-parent="#accordionSidebar">
 						<div class="bg-white py-2 collapse-inner rounded">
-							<a class="collapse-item" href="">Danh sách nhân viên</a>
+							<a class="collapse-item <?php if (($p == 'staff') && ($a == 'list-staff')) echo 'active'; ?>" href="danhsachnhanvien.php?p=staff&a=list-staff">
+								Danh sách nhân viên
+							</a> 
 							<a class="collapse-item" href="">Phòng ban</a>
 							<a class="collapse-item" href="">Loại nhân viên</a>
 							<a class="collapse-item" href="">Chức vụ</a>
@@ -109,7 +115,7 @@
 						</div>
 					</div>
 				</li>
-				
+
 				<!-- Divider -->
 				<hr class="sidebar-divider my-0">
 
@@ -143,18 +149,17 @@
 						</div>
 					</div>
 				</li>
-			
-	
+
+
 				<!-- Divider -->
 				<hr class="sidebar-divider d-none d-md-block">
 
 				<!-- Sidebar Toggler (Sidebar) -->
-				<div class=" d-none d-md-inline"style="margin-left: 30px;">
+				<div class=" d-none d-md-inline" style="margin-left: 30px;">
 					<button class="rounded-circle border-0" id="sidebarToggle"></button>
 				</div>
 
 
-			</ul>
-	
-	<!-- End of Sidebar -->
+		</ul>
 
+		<!-- End of Sidebar -->

@@ -1,3 +1,5 @@
 <?php 
-	header('Location: layouts/main.php');
+
+	header('Location: pages/index.php?p=index&a=statistic');
+
 ?>
