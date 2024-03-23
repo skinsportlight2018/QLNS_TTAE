@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 04, 2024 at 09:54 AM
+-- Generation Time: Mar 23, 2024 at 05:55 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -33,9 +33,9 @@ CREATE TABLE `bangcap` (
   `tenbangcap` varchar(255) NOT NULL,
   `ghichu` varchar(255) NOT NULL,
   `nguoitao` varchar(255) NOT NULL,
-  `ngaytao` int(11) NOT NULL,
+  `ngaytao` date NOT NULL,
   `nguoisua` varchar(255) NOT NULL,
-  `ngaysua` int(11) NOT NULL
+  `ngaysua` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 -- --------------------------------------------------------
@@ -63,9 +63,9 @@ CREATE TABLE `chucvu` (
   `luongngay` double NOT NULL,
   `ghichu` varchar(255) NOT NULL,
   `nguoitao` varchar(255) NOT NULL,
-  `ngaytao` int(11) NOT NULL,
+  `ngaytao` date NOT NULL,
   `nguoisua` varchar(255) NOT NULL,
-  `ngaysua` int(11) NOT NULL
+  `ngaysua` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 -- --------------------------------------------------------
@@ -80,9 +80,9 @@ CREATE TABLE `chuyenmon` (
   `tenchuyenmon` varchar(255) NOT NULL,
   `ghichu` varchar(255) NOT NULL,
   `nguoitao` varchar(255) NOT NULL,
-  `ngaytao` int(11) NOT NULL,
+  `ngaytao` date NOT NULL,
   `nguoisua` varchar(255) NOT NULL,
-  `ngaysua` int(11) NOT NULL
+  `ngaysua` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 -- --------------------------------------------------------
@@ -114,7 +114,7 @@ CREATE TABLE `congtac` (
 
 CREATE TABLE `dantoc` (
   `id` int(11) NOT NULL,
-  `tendantoc` int(11) NOT NULL
+  `tendantoc` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 -- --------------------------------------------------------
@@ -129,9 +129,9 @@ CREATE TABLE `loai_nv` (
   `tenloainv` varchar(255) NOT NULL,
   `ghichu` varchar(255) NOT NULL,
   `nguoitao` varchar(255) NOT NULL,
-  `ngaytao` int(11) NOT NULL,
+  `ngaytao` date NOT NULL,
   `nguoisua` varchar(255) NOT NULL,
-  `ngaysua` int(11) NOT NULL
+  `ngaysua` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 -- --------------------------------------------------------
@@ -206,9 +206,9 @@ CREATE TABLE `nhom` (
   `tennhom` varchar(255) NOT NULL,
   `mota` text NOT NULL,
   `nguoitao` varchar(255) NOT NULL,
-  `ngaytao` int(11) NOT NULL,
+  `ngaytao` date NOT NULL,
   `nguoisua` varchar(255) NOT NULL,
-  `ngaysua` int(11) NOT NULL
+  `ngaysua` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 -- --------------------------------------------------------
@@ -239,6 +239,15 @@ CREATE TABLE `quoctich` (
   `tenquoctich` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
+--
+-- Dumping data for table `quoctich`
+--
+
+INSERT INTO `quoctich` (`id`, `tenquoctich`) VALUES
+(1, 'Việt Nam'),
+(2, 'Mỹ'),
+(3, 'Canada');
+
 -- --------------------------------------------------------
 
 --
@@ -249,17 +258,22 @@ CREATE TABLE `taikhoan` (
   `id` int(11) NOT NULL,
   `ho` varchar(50) NOT NULL,
   `ten` varchar(50) NOT NULL,
-  `anh` varchar(50) NOT NULL,
+  `hinhanh` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `matkhau` varchar(50) NOT NULL,
   `sdt` varchar(50) NOT NULL,
   `quyen` tinyint(4) NOT NULL,
   `trangthai` tinyint(4) NOT NULL,
-  `nguoitao` varchar(255) NOT NULL,
-  `ngaytao` int(11) NOT NULL,
-  `nguoisua` varchar(255) NOT NULL,
-  `ngaysua` int(11) NOT NULL
+  `ngaytao` date NOT NULL,
+  `ngaysua` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
+
+--
+-- Dumping data for table `taikhoan`
+--
+
+INSERT INTO `taikhoan` (`id`, `ho`, `ten`, `hinhanh`, `email`, `matkhau`, `sdt`, `quyen`, `trangthai`, `ngaytao`, `ngaysua`) VALUES
+(1, 'Trung tâm ngoại ngữ ', 'American English', 'LogoAE1.jpg', 'trungtamngoainguAE@gmail.com', '25d55ad283aa400af464c76d713c07ad', '0587279754', 1, 1, '2024-03-23', '2024-03-23');
 
 -- --------------------------------------------------------
 
@@ -269,8 +283,16 @@ CREATE TABLE `taikhoan` (
 
 CREATE TABLE `tongiao` (
   `id` int(11) NOT NULL,
-  `tentongiao` int(11) NOT NULL
+  `tentongiao` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
+
+--
+-- Dumping data for table `tongiao`
+--
+
+INSERT INTO `tongiao` (`id`, `tentongiao`) VALUES
+(1, 'Phật Giáo'),
+(2, 'Thiên Chúa Giáo');
 
 -- --------------------------------------------------------
 
@@ -284,9 +306,9 @@ CREATE TABLE `trinhdo` (
   `tentrinhdo` varchar(255) NOT NULL,
   `ghichu` varchar(255) NOT NULL,
   `nguoitao` varchar(255) NOT NULL,
-  `ngaytao` int(11) NOT NULL,
+  `ngaytao` date NOT NULL,
   `nguoisua` varchar(255) NOT NULL,
-  `ngaysua` int(11) NOT NULL
+  `ngaysua` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
@@ -468,19 +490,19 @@ ALTER TABLE `phongban`
 -- AUTO_INCREMENT for table `quoctich`
 --
 ALTER TABLE `quoctich`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `taikhoan`
 --
 ALTER TABLE `taikhoan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tongiao`
 --
 ALTER TABLE `tongiao`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `trinhdo`
