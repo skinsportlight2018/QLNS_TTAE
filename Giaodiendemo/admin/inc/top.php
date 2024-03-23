@@ -1,6 +1,6 @@
 <!-- Content Wrapper -->
 <head>
-    <link rel="stylesheet" type="text/css" href="../css/main.css">
+    <link rel="stylesheet" type="text/css" href="../../css/main.css">
 </head>
 
 <div id="content-wrapper" class="d-flex flex-column">
@@ -123,28 +123,7 @@
                                 <div class="small text-gray-500">Emily Fowler · 58m</div>
                             </div>
                         </a>
-                        <a class="dropdown-item d-flex align-items-center" href="#">
-                            <div class="dropdown-list-image mr-3">
-                                <img class="rounded-circle" src="../img/undraw_profile_2.svg" alt="...">
-                                <div class="status-indicator"></div>
-                            </div>
-                            <div>
-                                <div class="text-truncate">I have the photos that you ordered last month, how
-                                    would you like them sent to you?</div>
-                                <div class="small text-gray-500">Jae Chun · 1d</div>
-                            </div>
-                        </a>
-                        <a class="dropdown-item d-flex align-items-center" href="#">
-                            <div class="dropdown-list-image mr-3">
-                                <img class="rounded-circle" src="../img/undraw_profile_3.svg" alt="...">
-                                <div class="status-indicator bg-warning"></div>
-                            </div>
-                            <div>
-                                <div class="text-truncate">Last month's report looks great, I am very happy with
-                                    the progress so far, keep up the good work!</div>
-                                <div class="small text-gray-500">Morgan Alvarez · 2d</div>
-                            </div>
-                        </a>
+                       
                         <a class="dropdown-item d-flex align-items-center" href="#">
                             <div class="dropdown-list-image mr-3">
                                 <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60" alt="...">

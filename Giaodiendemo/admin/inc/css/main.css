@@ -20,7 +20,7 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    width: calc(25% - 40px); /* Tính toán chiều rộng của mỗi thẻ và tính toán khoảng cách */
+    width: calc(25% - 40px);
     max-width: 250px; 
 }
 
