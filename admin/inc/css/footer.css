@@ -1,0 +1,14 @@
+
+.main-footer {
+    text-align: center;
+    background-color: #ffffff;
+    width: 100%;
+    padding: 18px;
+}
+
+
+
+.main-footer span {
+    font-size: 15px; 
+    font-weight: normal; 
+}

@@ -1,0 +1,31 @@
+table {
+    font-size: 12px;
+}
+
+table th {
+    background-color: #2C3D57; 
+    color: white;
+}
+
+table td {
+    color: #2C3D57;
+}
+
+.Sao
+{
+  color: red;
+} 
+.text {
+  margin-left: 10px;
+  font-style: italic;
+}
+.thongnaosao
+{
+  margin-left: 10px;
+  margin-top: 10px;
+}
+.row
+{
+  margin-left: 10px;
+  margin-right: 10px;
+}

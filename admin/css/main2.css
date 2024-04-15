@@ -1,0 +1,345 @@
+.subtitle {
+font-size: 1rem;
+color: #ffffff; /* Màu xanh dương */
+margin-top: 10px; /* Khoảng cách với phần tử trên */
+}
+
+.buttonTQ {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.buttonTQ > div {
+    margin-right: 10px;
+}
+
+/* Chỉnh CSS cho ô */
+.buttonTQ .rounded {
+    width: 200px;
+    height: 100px;
+}
+
+/* ================== Ô SỐ 1 =====================*/
+.rounded-box1 {
+    position: relative;
+    width: 265px;
+    height: 100px;
+    background-color: #2C3D57;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    margin-bottom: 20px;
+}
+
+.rounded-box1 a {
+    margin-top: 5px;    
+    text-decoration: none;
+    color: inherit;
+}
+
+.rounded-box1 a:hover {
+    color: #ffffff;
+}
+
+.icon1 {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #2C3D57;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 20px;
+}
+
+.icon1 i {
+    color: white;
+    font-size: 50px;
+}
+
+.right-box1 {
+    display: flex;
+    flex-direction: column;
+}
+
+.rounded-box {
+    position: relative;
+    width: 165px;
+    height: 100px;
+    background-color: #4a70a9;
+    color: rgb(255, 255, 255);
+}
+
+.rounded-box:hover {
+    background-color: #274e8a;
+    color: #d5cccc;
+}
+/* ================== Ô SỐ 2 =====================*/
+.rounded-box2 {
+    position: relative;
+    width: 265px;
+    height: 100px;
+    background-color: #415bc0;
+    color: rgb(66, 56, 56);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    margin-bottom: 20px;
+}
+
+.rounded-box2 a {
+    margin-top: 5px;    
+    text-decoration: none;
+    color: inherit;
+}
+
+.rounded-box2 a:hover {
+    color: #ffffff;
+}
+
+.rounded-box2:hover{
+    background-color: #E3E1D9;
+    color: #ffffff;
+}
+
+.icon2 {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #b1b1bb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 20px;
+}
+
+.icon2 i {
+    color: white;
+    font-size: 24px;
+}
+
+.right-box2 {
+    display: flex;
+    flex-direction: column;
+}
+
+/* ================== Ô SỐ 1 =====================*/
+.rounded-box3 {
+    position: relative;
+    width: 265px;
+    height: 100px;
+    background-color: #415bc0;
+    color: rgb(66, 56, 56);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    margin-bottom: 20px;
+}
+
+.rounded-box3 a {
+    margin-top: 5px;    
+    text-decoration: none;
+    color: inherit;
+}
+
+.rounded-box3 a:hover {
+    color: #ffffff;
+}
+
+.rounded-box3:hover{
+    background-color: #E3E1D9;
+    color: #ffffff;
+}
+
+.icon3 {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #b1b1bb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 20px;
+}
+
+.icon3 i {
+    color: white;
+    font-size: 24px;
+}
+
+.right-box3 {
+    display: flex;
+    flex-direction: column;
+}
+
+/* ================== Ô SỐ 1 =====================*/
+.rounded-box4 {
+    position: relative;
+    width: 265px;
+    height: 100px;
+    background-color: #415bc0;
+    color: rgb(66, 56, 56);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    margin-bottom: 20px;
+}
+
+.rounded-box4 a {
+    margin-top: 5px;    
+    text-decoration: none;
+    color: inherit;
+}
+
+.rounded-box4 a:hover {
+    color: #ffffff;
+}
+
+.rounded-box4:hover{
+    background-color: #E3E1D9;
+    color: #ffffff;
+}
+
+.icon4 {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #b1b1bb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 20px;
+}
+
+.icon4 i {
+    color: white;
+    font-size: 24px;
+}
+
+.right-box4 {
+    display: flex;
+    flex-direction: column;
+}
+
+/* ================== Ô SỐ 5 =====================*/
+.rounded-box5 {
+    position: relative;
+    width: 265px;
+    height: 100px;
+    background-color: #415bc0;
+    color: rgb(66, 56, 56);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    margin-bottom: 20px;
+}
+
+.rounded-box5 a {
+    margin-top: 5px;    
+    text-decoration: none;
+    color: inherit;
+}
+
+.rounded-box5 a:hover {
+    color: #ffffff;
+}
+
+.rounded-box5:hover{
+    background-color: #E3E1D9;
+    color: #ffffff;
+}
+
+.icon5 {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #b1b1bb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 20px;
+}
+
+.icon5 i {
+    color: white;
+    font-size: 24px;
+}
+
+.right-box5 {
+    display: flex;
+    flex-direction: column;
+}
+
+/* ================== Ô SỐ 6 =====================*/
+.rounded-box6 {
+    position: relative;
+    width: 265px;
+    height: 100px;
+    background-color: #415bc0;
+    color: rgb(66, 56, 56);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    margin-bottom: 20px;
+}
+
+.rounded-box6 a {
+    margin-top: 5px;    
+    text-decoration: none;
+    color: inherit;
+}
+
+.rounded-box6 a:hover {
+    color: #ffffff;
+}
+
+.rounded-box6:hover{
+    background-color: #E3E1D9;
+    color: #ffffff;
+}
+
+.icon6 {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #b1b1bb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 20px;
+}
+
+.icon6 i {
+    color: white;
+    font-size: 24px;
+}
+
+.right-box6 {
+    display: flex;
+    flex-direction: column;
+}
+/* =======================================*/
+
+.container1 {
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    display: flex;
+}
+
+.col {
+    flex: 1;
+    padding: 5 px;
+    text-align: center;
+}
+

@@ -1,0 +1,5 @@
+/* Di chuyển hộp tìm kiếm (filter) sang phải */
+.dataTables_filter {
+    float: right;
+    text-align: right;
+}

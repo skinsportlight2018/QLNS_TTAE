@@ -1,0 +1,39 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.card {
+    width: 100%;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.col-lg-6 {
+    flex: 0 0 48%;
+}
+
+.TTAE {
+    text-align: right;
+}
+
+.rounded-circle {
+    width: 200px;
+    height: 200px;
+}
+
+.left-card {
+    width: 100%;
+    background-color: white;
+    padding: 20px;
+}
+.blue
+{
+    background-color:#e2dbdb;
+}
