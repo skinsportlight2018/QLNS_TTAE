@@ -35,6 +35,12 @@ if (isset($_SESSION['delete_message'])) {
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
+<nav aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="../kttaikhoan/main.php"><i class="fas fa-home"></i> Tổng Quát</a></li>
+			<li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Danh sách tôn giáo</li>
+		</ol>
+	</nav>
 	<!-- DataTales Example -->
 	<div class="card shadow mb-4">
 		<div class="card-body">
