@@ -21,6 +21,7 @@ require("../model/dantoc.php");
 
 require("../model/luong.php");
 require("../model/tinhluong.php");
+require("../model/chamcong.php");
 
 // Xét xem có thao tác nào được chọn
 if (isset($_REQUEST["action"])) {
@@ -29,7 +30,7 @@ if (isset($_REQUEST["action"])) {
     $action = "xem";
 }
 
-$l= new LUONG();
+$l = new LUONG();
 $nvien = new NHANVIEN();
 $qt = new QUOCTICH();
 $tg = new TONGIAO();
@@ -39,14 +40,35 @@ $td = new TRINHDO();
 $cm = new CHUYENMON();
 $bc = new BANGCAP();
 $cv = new CHUCVU();
-$result = false; 
+$result = false;
+
 $tinhLuong = new TinhLuong();
+$cc = new CHAMCONG();
+$chamcong = $cc->laychamcong();
 
 
 switch ($action) {
     case "xem":
         $luong = $l->layluong();
-        include("main.php");
+
+        $currentMonth = date('n');
+        $currentYear = date('Y');
+        // Lấy dữ liệu bảng chấm công trong tháng này
+        if ($nvien) {
+            $nhanvien = $nvien->laynv();
+        }
+        // Kiểm tra nếu $nhanvien và $chamcong không null trước khi sử dụng
+        if ($nhanvien && $chamcong) {
+            $tongCongNhanVien = array();
+            foreach ($nhanvien as $nv) {
+                $tongCong = $cc->tongcongNhanVien($nv['id'], $currentMonth, $currentYear);
+                $tongCongNhanVien[$nv['id']] = $tongCong;
+            }
+            include("main.php");
+        } else {
+            // Xử lý trường hợp không có dữ liệu trả về từ DB
+            echo "Không có dữ liệu nhân viên hoặc chấm công.";
+        }
         break;
 
     case "xoa":
@@ -73,7 +95,7 @@ switch ($action) {
             $nv = $nvien->laynvtheoid($_GET["id"]);
             $nhanvien_id = $_GET['id'];
             $c = $cv->laychucvutheoid($_GET["id"]);
-    
+
             $chi_tiet_luong = $l->layluongtheonv($nhanvien_id);
 
             //chucvu_id -> tenchucvu
@@ -116,12 +138,20 @@ switch ($action) {
             include("main.php");
         }
         break;
-    
+    case "timkiem":
+        if (isset($_GET["thang"]) && isset($_GET["nam"])) {
+            $thang = $_GET["thang"];
+            $nam = $_GET["nam"];
+            $luong = $l->layLuongTheoNgay($thang, $nam);
+            include("main.php");
+        }
+        break;
+
     case "them":
         $luong = $l->layluong();
         $nhanvien = $nvien->laynv();
         $chucvu = $cv->laychucvu();
-       
+
         include("themluong.php");
         break;
 
@@ -130,16 +160,15 @@ switch ($action) {
         $error = array();
         $success = array();
         $tamUngChoPhep = 0;
-        
+
         $maluong = $_POST['maluong'];
         $manhanvien = $_POST['manhanvien'];
         $soNgayCong = $_POST['soNgayCong'];
-        $phuCap = $_POST['phuCap'];
         $tamUng = $_POST['tamUng'];
         $moTa = $_POST['moTa'];
         $ngayTinhLuong = $_POST['ngayTinhLuong'];
 
-        $error = $tinhLuong->tinhLuongNhanVien($maluong, $manhanvien, $soNgayCong, $phuCap, $tamUng, $moTa, $ngayTinhLuong);
+        $error = $tinhLuong->tinhLuongNhanVien($maluong, $manhanvien, $soNgayCong, $tamUng, $moTa, $ngayTinhLuong);
 
         if (empty($error)) {
             $lmoi = new LUONG();
@@ -155,11 +184,11 @@ switch ($action) {
                 header("Location: ../qlluong/themluong.php");
                 exit();
             }
-            } else {
-                $_SESSION['error_message'] = "Đã xảy ra lỗi khi tính lương!";
-                header("Location: ../qlluong/themluong.php");
-                exit();
-            }
+        } else {
+            $_SESSION['error_message'] = "Đã xảy ra lỗi khi tính lương!";
+            header("Location: ../qlluong/themluong.php");
+            exit();
+        }
         break;
     default:
         break;

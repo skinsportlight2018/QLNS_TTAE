@@ -6,12 +6,18 @@ include("../inc/top.php");
 
 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 	<div class="container">
-		<h1 class="h3 mb-0 custom-heading">Thông tin nhân viên</h1>
+		<h1 class="h3 mb-0 custom-heading">Thông tin lương nhân viên</h1>
 	</div>
 </nav>
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
+<nav aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="../kttaikhoan/main.php"><i class="fas fa-home"></i> Tổng Quát</a></li>
+			<li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Thông tin lương nhân viên</li>
+		</ol>
+	</nav>
     <div class="row">
         <!-- Donut Chart -->
         <div class="col-xl-4 col-lg-5">
@@ -223,14 +229,6 @@ include("../inc/top.php");
                     ?>
 
 					</tbody>
-					<div class="mb-4">
-						<a href="index.php?action=them" class="btn btn-primary">
-							<i class="bi bi-file-earmark-plus px-0.5"></i>Tính lương
-						</a>
-						<a href="exportNV.php" class="btn btn-info">
-							<i class="bi bi-file-earmark-excel-fill px-0.5"></i>Excel
-						</a>
-					</div>
 				</table>
 			</div>
 		</div>
