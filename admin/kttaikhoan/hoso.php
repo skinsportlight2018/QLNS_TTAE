@@ -82,7 +82,7 @@ include("../inc/top.php");
 
                                     <div class="my-3">    
                                         <label class="form-label">Số điện thoại</label>    
-                                        <input class="form-control" type="text" name="txtdienthoai" placeholder="Số điện thoại" value="<?php echo $_SESSION["taikhoan"]["sdt"]; ?>" required>
+                                        <input class="form-control" type="text" name="txtsdt" placeholder="Số điện thoại" value="<?php echo $_SESSION["taikhoan"]["sdt"]; ?>" required>
                                     </div>    
 
                                     <div class="my-3">

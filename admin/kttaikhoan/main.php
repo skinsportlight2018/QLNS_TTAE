@@ -7,6 +7,51 @@ if (!$conn) {
     die("Kết nối không thành công: " . mysqli_connect_error());
 }
 
+$chucvu = array(); // Khởi tạo mảng để lưu trữ dữ liệu chức vụ từ CSDL
+// Truy vấn CSDL để lấy dữ liệu chức vụ
+        // Truy vấn CSDL để lấy dữ liệu chức vụ
+$sql_chucvu = "SELECT * FROM chucvu";
+$result_chucvu = mysqli_query($conn, $sql_chucvu);
+
+// Kiểm tra và lưu trữ dữ liệu chức vụ vào mảng $chucvu
+if (mysqli_num_rows($result_chucvu) > 0) {
+    while ($row_chucvu = mysqli_fetch_assoc($result_chucvu)) {
+        $chucvu[] = $row_chucvu;
+    }
+}
+
+$nhanvien = array(); // Khởi tạo mảng để lưu trữ dữ liệu chức vụ từ CSDL
+// Truy vấn CSDL để lấy dữ liệu chức vụ
+        // Truy vấn CSDL để lấy dữ liệu chức vụ
+        $sql_nhanvien = "SELECT n.*, c.tenchucvu 
+        FROM nhanvien n 
+        INNER JOIN chucvu c ON n.chucvu_id = c.id";
+$result_nhanvien = mysqli_query($conn, $sql_nhanvien);
+
+// Kiểm tra và lưu trữ dữ liệu chức vụ vào mảng $chucvu
+if (mysqli_num_rows($result_nhanvien) > 0) {
+    while ($row_nhanvien = mysqli_fetch_assoc($result_nhanvien)) {
+        $nhanvien[] = $row_nhanvien;
+    }
+}
+
+$luong = array(); // Khởi tạo mảng để lưu trữ dữ liệu chức vụ từ CSDL
+// Truy vấn CSDL để lấy dữ liệu chức vụ
+        // Truy vấn CSDL để lấy dữ liệu chức vụ
+        $sql_luong = "SELECT l.*, nv.hotennv, cv.tenchucvu
+        FROM luong l 
+        INNER JOIN nhanvien nv ON l.nhanvien_id = nv.id 
+        INNER JOIN chucvu cv ON nv.chucvu_id = cv.id
+        ORDER BY l.id DESC";
+$result_luong = mysqli_query($conn, $sql_luong);
+
+// Kiểm tra và lưu trữ dữ liệu chức vụ vào mảng $chucvu
+if (mysqli_num_rows($result_luong) > 0) {
+    while ($row_luong = mysqli_fetch_assoc($result_luong)) {
+        $luong[] = $row_luong;
+    }
+}
+
 // Truy vấn để đếm số lượng nhân viên
 $sql = "SELECT COUNT(*) AS total FROM nhanvien";
 $result = mysqli_query($conn, $sql);
@@ -31,12 +76,13 @@ mysqli_close($conn);
 ?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+<link rel="stylesheet" href="../css/table1.css">
 <link rel="stylesheet" href="../css/main2.css">
 <!-- Hàng số 1 -->
 <div class="container-fluid">
 
     <!-- Phần button quản lý -->
-    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow" href="../qlbangcap/index.php">
+    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
         <div class="container">
             <h1 class="h3 mb-0 text-gray-800">Bảng điều khiển</h1>
         </div>
@@ -46,7 +92,8 @@ mysqli_close($conn);
         <div class="col">
             <div class="rounded-box1">
                 <div class="icon1">
-                    <i class="bi bi-person-fill"></i>
+                    <lord-icon src="https://cdn.lordicon.com/lhwyshcs.json" trigger="loop" stroke="bold" state="hover-nodding" colors="primary:#ffffff,secondary:#b4b4b4" style="width:100px;height:100px">
+                    </lord-icon>                
                 </div>
 
                 <div class="rounded-box">
@@ -61,7 +108,9 @@ mysqli_close($conn);
         <div class="col">
             <div class="rounded-box1">
                 <div class="icon1">
-                    <i class="bi bi-cash-coin"></i>
+                    <script src="https://cdn.lordicon.com/lordicon.js"></script>
+                    <lord-icon src="https://cdn.lordicon.com/kndkiwmf.json" trigger="loop" stroke="bold" colors="primary:#ffffff,secondary:#ffc738" style="width:100px;height:100px">
+                    </lord-icon>
                 </div>
 
                 <div class="rounded-box">
@@ -84,7 +133,7 @@ mysqli_close($conn);
         <div class="col">
             <div class="rounded-box1">
                 <div class="icon1">
-                    <i class="bi bi-calendar"></i>
+                    <img src="../img/icon/icons8-calendar.gif" alt="Corruption" trigger="loop" stroke="bold" colors="primary:#ffffff,secondary:#ffc738" style="width:50px;height:50px" />
                 </div>
 
                 <div class="rounded-box">
@@ -110,7 +159,8 @@ mysqli_close($conn);
         <div class="col">
             <div class="rounded-box1">
                 <div class="icon1">
-                    <i class="bi bi-person-bounding-box"></i>
+                    <lord-icon src="https://cdn.lordicon.com/qmsejndz.json" trigger="in" stroke="bold" state="morph-open" colors="primary:#ffffff,secondary:#eeaa66" style="width:100px;height:100px">
+                    </lord-icon>     
                 </div>
 
                 <div class="rounded-box">
@@ -128,7 +178,8 @@ mysqli_close($conn);
         <div class="col">
             <div class="rounded-box1">
                 <div class="icon1">
-                    <i class="bi bi-people-fill"></i>
+                    <lord-icon src="https://cdn.lordicon.com/wzrwaorf.json" trigger="loop" colors="primary:#e4e4e4,secondary:#faf9d1" style="width:100px;height:100px">
+                    </lord-icon>
                 </div>
 
                 <div class="rounded-box">
@@ -143,7 +194,8 @@ mysqli_close($conn);
         <div class="col">
             <div class="rounded-box1">
                 <div class="icon1">
-                    <i class="bi bi-gear-fill"></i>
+                    <lord-icon src="https://cdn.lordicon.com/xcxzayqr.json" trigger="in" delay="50" stroke="bold" state="in-reveal" colors="primary:#ffffff,secondary:#faf9d1" style="width:100px;height:100px">
+                    </lord-icon>                
                 </div>
 
                 <div class="rounded-box">
@@ -158,7 +210,7 @@ mysqli_close($conn);
         <div class="col">
             <div class="rounded-box1">
                 <div class="icon1">
-                    <i class="bi bi-file-earmark-fill"></i>
+                    <img width="100" height="100" src="https://img.icons8.com/fluency/240/ms-excel.png" alt="ms-excel" />
                 </div>
 
                 <div class="rounded-box">
@@ -171,7 +223,7 @@ mysqli_close($conn);
         <div class="col">
             <div class="rounded-box1">
                 <div class="icon1">
-                    <i class="bi bi-file-earmark-fill"></i>
+                    <img width="100" height="100" src="https://img.icons8.com/fluency/240/ms-excel.png" alt="ms-excel" />
                 </div>
 
                 <div class="rounded-box">
@@ -194,36 +246,102 @@ mysqli_close($conn);
     <!-- Hàng số 6: Lịch làm việc của Trung tâm ngoại ngữ American English -->
 
     <style>
-        /* Đặt chiều cao của canvas trong biểu đồ */
         #pieChart {
             height: 100%;
-            width: 200%;
+            width: 100%;
         }
     </style>
 
-    <div class="row">
+<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow" href="../qlbangcap/index.php">
+        <div class="container">
+            <h1 class="h3 mb-0 text-gray-800">Thống kê danh sách</h1>
+        </div>
+    </nav>
+
+<div class="container-fluid">
+    <div class="row flex-row-reverse"> <!-- Thay đổi lớp thành flex-row-reverse -->
         <!-- Area Chart -->
-        <div class="col-xl-7 col-lg-5">
-            <div class="card shadow mb-4">
+       
+
+        <!-- Bảng Chức vụ -->
+        <div class="col-xl-3.05 col-lg-6 flex-column-reverse"> <!-- Thay đổi lớp thành flex-column-reverse -->
+            <div class="card shadow mb-6">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>STT</th>
+                                        <th>Mã nhân viên</th>
+                                        <th>Tên nhân viên</th>
+                                        <th>Chức vụ</th>
+                                        <th>Xem</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                            $stt = 1;
+                            foreach ($nhanvien as $nv) :
+                            ?>
+                                <tr>
+                                    <td><?php echo $stt++; ?></td>
+                                    <td><?php echo $nv["manv"]; ?></td>
+                                    <td><?php echo $nv["hotennv"]; ?></td>
+                                    <td><?php echo $nv["tenchucvu"]; ?></td>							
+                                    <td><a class="btn btn-info" href="index.php?action=chitiet&id=<?php echo $nv["id"]; ?>"><i class="align-middle fas fa-eye"></i></a></td>
+
+                                </tr>
+                            <?php
+                            endforeach;
+                            ?>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            
+            </div>
+            <div class="col-xl-6 col-lg-6">
+            <div class="card shadow mb-5">
                 <!-- Card Body -->
                 <div class="card-body">
                     <canvas id="pieChart"></canvas>
-
                 </div>
-            </div>
-        </div>
-
-        <div class="col-xl-3.05 col-lg-4">
-            <div class="card shadow mb-4">
-                <!-- Card Body -->
                 <div class="card-body">
-                    <div id="calendar"></div>
-                </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Mã chức vụ</th>
+                                    <th>Tên chức vụ</th>
+                                    <th>Lương ngày</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $stt=1;
+                                foreach ($chucvu as $cv) :
+                                ?>
+                                        <tr>
+                                            <td><?php echo $stt++; ?></td>
+                                            <td><?php echo $cv["machucvu"]; ?></td>
+                                            <td><?php echo $cv["tenchucvu"]; ?></td>
+                                            <td><?php echo number_format($cv["luongngay"], 0, ',', '.'); ?></td>
+                                        </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
             </div>
         </div>
-    </div>
+            
+        </div>
+            </div>
 
-
+            
+</div>
 
     <script>
         $(document).ready(function() {
@@ -307,50 +425,77 @@ mysqli_close($conn);
         }
     </script>
 
-    <!-- Thêm CSS của FullCalendar -->
-    <link href="https://unpkg.com/fullcalendar@5.10.0/main.min.css" rel="stylesheet">
-    <!-- Thêm JavaScript của FullCalendar -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-    <script src="https://unpkg.com/fullcalendar@5.10.0/main.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var calendarEl = document.getElementById('calendar');
-
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                selectable: true, // Cho phép người dùng chọn ngày
-                initialView: 'dayGridMonth', // Chế độ xem ban đầu là tháng
-                headerToolbar: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
-                },
-                events: [ // Danh sách sự kiện mẫu
-                    {
-                        title: 'Meeting',
-                        start: '2024-04-01T10:00:00',
-                        end: '2024-04-01T12:00:00'
-                    },
-                    {
-                        title: 'Birthday Party',
-                        start: '2024-04-10',
-                        end: '2024-04-11'
-                    }
-                    // Thêm các sự kiện khác tại đây...
-                ],
-                select: function(info) {
-                    // Xử lý sự kiện khi người dùng chọn một ngày trên lịch
-                    alert('Selected date: ' + info.startStr);
-                    // Thêm các thông báo hoặc xử lý khác tại đây...
-                }
-            });
-
-            calendar.render(); // Hiển thị lịch
-        });
-    </script>
-
-
-
 </div>
+<div style="margin-left:25px; margin-right:20px; margin-top:20px;">
+<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+        <div class="container">
+            <h1 class="h3 mb-0 text-gray-800">Lương nhân viên tháng <?php echo date("m/Y"); ?></h1>
+        </div>
+    </nav>
+
+    <div class="card shadow mb-4">
+		<div class="card-body">
+			<div class="table-responsive">
+
+				<div class="mb-4 d-flex align-items-center">
+					<a href="../qltinhluong/index.php" class="btn btn-primary mr-2">
+						<i class="bi bi-file-earmark-plus px-0.5"></i>Tính lương
+					</a>
+					<a href="exportLuong.php" class="btn btn-info mr-2">
+						<i class="bi bi-file-earmark-excel-fill px-0.5"></i>Excel
+					</a>
+					<button type="button" class="btn btn-search" onclick="searchByMonth()">
+						<i class="bi bi-search"></i>
+					</button>
+					<input type="month" class="form-control" id="searchMonth" name="searchMonth" style="width: 195px;margin-left:10px;">
+				</div>
+
+
+				<table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
+    <thead>
+        <tr>
+            <th>STT</th>
+            <th>Mã lương</th>
+            <th>Tên nhân viên</th>
+            <th>Chức vụ</th>
+            <th>Lương tháng</th>
+            <th>Ngày công</th>
+            <th>Thực lãnh</th>
+            <th>Ngày chấm</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        $count = 0; // Biến đếm
+        if ($luong) {
+            $stt = 1;
+            foreach ($luong as $l) :
+                if ($count < 20) { // Chỉ hiển thị tối đa 30 dòng
+                    ?>
+                    <tr>
+                        <td><?php echo $stt++; ?></td>
+                        <td><?php echo $l["maluong"]; ?></td>
+                        <td><?php echo $l["hotennv"]; ?></td>
+                        <td><?php echo $l["tenchucvu"]; ?></td>
+                        <td><?php echo number_format($l["luongthang"], 0, ',', '.') . ' VNĐ'; ?></td>
+                        <td class="text-center"><?php echo $l["ngaycong"]; ?></td>
+                        <td><?php echo number_format($l["thuclanh"], 0, ',', '.') . ' VNĐ'; ?></td>
+                        <td class="text-center"><?php echo date("d/m/Y", strtotime($l["ngaychamcong"])); ?></td>
+                    </tr>
+                    <?php
+                    $count++; // Tăng biến đếm sau mỗi lần hiển thị dòng
+                } else {
+                    break; // Nếu đã hiển thị đủ 30 dòng thì dừng vòng lặp
+                }
+            endforeach;
+        }
+        ?>
+    </tbody>
+</table>
+			</div>
+		</div>
+	</div>
+    </div>
 <!-- /.container-fluid -->
 <!-- End of Main Content -->
 <?php include("../inc/footer.php"); ?>
