@@ -174,6 +174,25 @@ switch ($action) {
         }
         break;
 
+        case "timkiem":
+            if (isset($_GET["search"])) {
+                $searchTerm = $_GET["search"];
+                $nhanvienData = $nvien->layDanhSachNhanVien();
+                // Chuyển đổi dữ liệu từ JSON thành mảng
+                $nhanvienArray = json_decode($nhanvienData, true);
+                $results = array();
+                // Lặp qua mảng nhân viên và tìm kiếm theo từ khóa
+                foreach ($nhanvienArray as $nv) {
+                    if (stripos($nv["manv"], $searchTerm) !== false || stripos($nv["hotennv"], $searchTerm) !== false) {
+                        $results[] = $nv;
+                    }
+                }
+                // Chuyển đổi kết quả thành JSON và trả về cho file `top.php`
+                echo json_encode($results);
+                exit(); // Kết thúc quá trình xử lý
+            }
+            break;
+    
     case "sua":
         if (isset($_GET["id"])) {
             $nv = $nvien->laynvtheoid($_GET["id"]);
@@ -209,7 +228,7 @@ switch ($action) {
         $nvm->setmanv($_POST["txtmanv"]);
         $nvm->sethotennv($_POST["txthotennv"]);
         $nvm->setsdt($_POST["txtsdt"]);
-        $nvm->setgioitinh($_POST["optgioitinh"]);
+        $nvm->setgioitinh(intval($_POST["optgioitinh"]));
         $nvm->setngaysinh($_POST["txtngaysinh"]);
         $nvm->setnoisinh($_POST["txtnoisinh"]);
         $nvm->setcccd($_POST["txtcccd"]);
@@ -217,7 +236,7 @@ switch ($action) {
         $nvm->setngaycap_cccd($_POST["txtngaycapcccd"]);
         $nvm->setquequan($_POST["txtquequan"]);
         $nvm->settamtru($_POST["txttamtru"]);
-        $nvm->settrangthai($_POST["opttrangthai"]);
+        $nvm->settrangthai(intval($_POST["opttrangthai"]));
         $nvm->sethinhanh($_POST["txthinhcu"]);
 
         // upload file mới (nếu có)
@@ -225,7 +244,7 @@ switch ($action) {
             // xử lý file upload -- Cần bổ sung kiểm tra: dung lượng, kiểu file, ...
             $hinhanh = "" . basename($_FILES["filehinhanh"]["name"]);
             $nvm->sethinhanh($hinhanh);
-            $duongdan = "../../" . $hinhanh;
+            $duongdan = "../img/Avatar/" . $hinhanh;
             move_uploaded_file($_FILES["filehinhanh"]["tmp_name"], $duongdan);
         }
 

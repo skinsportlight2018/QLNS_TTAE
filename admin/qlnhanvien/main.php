@@ -32,6 +32,12 @@ if (isset($_SESSION['delete_message'])) {
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
+<nav aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="../kttaikhoan/main.php"><i class="fas fa-home"></i> Tổng Quát</a></li>
+			<li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Danh sách nhân viên</li>
+		</ol>
+	</nav>
 	<!-- DataTales Example -->
 	<div class="card shadow mb-4">
 		<div class="card-body">
@@ -98,6 +104,9 @@ if (isset($_SESSION['delete_message'])) {
 						</a>
 						<a href="exportNV.php" class="btn btn-info">
 							<i class="bi bi-file-earmark-excel-fill px-0.5"></i>Excel
+						</a>
+						<a href="exportPDFnv.php" class="btn btn-danger">
+							<i class="bi bi-file-earmark-excel-fill px-0.5"></i>PDF
 						</a>
 					</div>
 				</table>

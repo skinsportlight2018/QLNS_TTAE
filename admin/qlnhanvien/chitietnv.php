@@ -13,6 +13,13 @@ include("../inc/top.php");
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
+<nav aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="../kttaikhoan/main.php"><i class="fas fa-home"></i> Tổng Quát</a></li>
+			<li class="breadcrumb-item"><a href="../qlnhanvien/index.php"><i class="bi bi-person-fill"></i>Danh sách nhân viên</a></li>
+			<li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Hồ sơ nhân viên</li>
+		</ol>
+	</nav>
     <div class="row">
         <!-- Donut Chart -->
         <div class="col-xl-4 col-lg-5">
@@ -114,34 +121,34 @@ include("../inc/top.php");
 
                                 <div class="my-1">    
                                     <label class="form-label">Căn cước công dân</label>
-                                    <input class="form-control" type="text" name="txtcccd" style="font-size: 13px" value="<?php echo $nv["cccd"]; ?>" required>
+                                    <input class="form-control" type="text" name="txtcccd" style="font-size: 13px" value="<?php echo $nv["cccd"]; ?>" readonly>
                                 </div>
                                 
 
 
                                     <div class="my-1">    
                                         <label class="form-label">Nơi cấp CCCD</label>
-                                        <input class="form-control" type="text" name="txtnoicapcccd" style="font-size: 13px" value="<?php echo $nv["noicap_cccd"]; ?>" required>    
+                                        <input class="form-control" type="text" name="txtnoicapcccd" style="font-size: 13px" value="<?php echo $nv["noicap_cccd"]; ?>" readonly>    
                                     </div>  
                                     
                                     <div class="my-1">    
                                         <label class="form-label">Ngày cấp CCCD</label>
-                                        <input class="form-control" type="text" name="txtngaycapcccd" style="font-size: 13px" value="<?php echo date("d/m/Y", strtotime($nv["ngaycap_cccd"])); ?>" required>                        
+                                        <input class="form-control" type="text" name="txtngaycapcccd" style="font-size: 13px" value="<?php echo date("d/m/Y", strtotime($nv["ngaycap_cccd"])); ?>" readonly>                        
                                     </div>
 
                                     <div class="my-1">    
                                         <label class="form-label">Nơi sinh</label>
-                                        <input class="form-control" type="text" name="txtnoisinh" style="font-size: 13px" value="<?php echo $nv["noisinh"]; ?>" required>                        
+                                        <input class="form-control" type="text" name="txtnoisinh" style="font-size: 13px" value="<?php echo $nv["noisinh"]; ?>" readonly>                        
                                     </div>
 
                                     <div class="my-1">    
                                         <label class="form-label">Quê quán</label>
-                                        <input class="form-control" type="text" name="txtquequan" style="font-size: 13px" value="<?php echo $nv["quequan"]; ?>" required>    
+                                        <input class="form-control" type="text" name="txtquequan" style="font-size: 13px" value="<?php echo $nv["quequan"]; ?>" readonly>    
                                     </div> 
                                     
                                     <div class="my-1">    
                                         <label class="form-label">Tạm trú</label>
-                                        <input class="form-control" type="text" name="txttamtru" style="font-size: 13px" value="<?php echo $nv["tamtru"]; ?>" required>                        
+                                        <input class="form-control" type="text" name="txttamtru" style="font-size: 13px" value="<?php echo $nv["tamtru"]; ?>" readonly>                        
                                     </div>
                                 </div>
 
@@ -149,32 +156,32 @@ include("../inc/top.php");
 
                                     <div class="my-1">    
                                         <label class="form-label">Quốc tịch</label>
-                                        <input class="form-control" type="text" name="txtquoctich" style="font-size: 13px" value="<?php echo $nv["tenquoctich"]; ?>" required>    
+                                        <input class="form-control" type="text" name="txtquoctich" style="font-size: 13px" value="<?php echo $nv["tenquoctich"]; ?>" readonly>    
                                     </div> 
 
                                     <div class="my-1">    
                                         <label class="form-label">Dân tộc</label>
-                                        <input class="form-control" type="text" name="txtdantoc" style="font-size: 13px" value="<?php echo $nv["tendantoc"]; ?>" required>    
+                                        <input class="form-control" type="text" name="txtdantoc" style="font-size: 13px" value="<?php echo $nv["tendantoc"]; ?>" readonly>    
                                     </div> 
 
                                     <div class="my-1">    
                                         <label class="form-label">Tôn giáo</label>
-                                        <input class="form-control" type="text" name="txttongiao" style="font-size: 13px" value="<?php echo $nv["tentongiao"]; ?>" required>    
+                                        <input class="form-control" type="text" name="txttongiao" style="font-size: 13px" value="<?php echo $nv["tentongiao"]; ?>" readonly>    
                                     </div> 
 
                                     <div class="my-1">    
                                         <label class="form-label">Trình độ</label>
-                                        <input class="form-control" type="text" name="txttrinhdo" style="font-size: 13px" value="<?php echo $nv["tentrinhdo"]; ?>" required>    
+                                        <input class="form-control" type="text" name="txttrinhdo" style="font-size: 13px" value="<?php echo $nv["tentrinhdo"]; ?>" readonly>    
                                     </div> 
 
                                     <div class="my-1">    
                                         <label class="form-label">Chuyên môn</label>
-                                        <input class="form-control" type="text" name="txtchuyenmon" style="font-size: 13px" value="<?php echo $nv["tenchuyenmon"]; ?>" required>    
+                                        <input class="form-control" type="text" name="txtchuyenmon" style="font-size: 13px" value="<?php echo $nv["tenchuyenmon"]; ?>" readonly>    
                                     </div> 
 
                                     <div class="my-1">    
                                         <label class="form-label">Bằng cấp</label>
-                                        <input class="form-control" type="text" name="txtbangcap" style="font-size: 13px" value="<?php echo $nv["tenbangcap"]; ?>" required>    
+                                        <input class="form-control" type="text" name="txtbangcap" style="font-size: 13px" value="<?php echo $nv["tenbangcap"]; ?>" readonly>    
                                     </div>
                                 </div>
                             </div>
