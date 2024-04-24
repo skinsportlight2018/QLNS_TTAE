@@ -660,7 +660,7 @@ class NHANVIEN
                 $cmd->bindValue(":hotennv", $nv->gethotennv());
                 $cmd->bindValue(":sdt", $nv->getsdt());
                 $cmd->bindValue(":hinhanh", $nv->gethinhanh());
-                $cmd->bindValue(":gioitinh", $nv->getgioitinh());
+                $cmd->bindValue(":gioitinh", $nv->getgioitinh()); 
                 $cmd->bindValue(":ngaysinh", $nv->getngaysinh());
                 $cmd->bindValue(":noisinh", $nv->getnoisinh());
                 $cmd->bindValue(":cccd", $nv->getcccd());
@@ -687,29 +687,24 @@ class NHANVIEN
             exit();
         }
     }
-    
-    public function timkiemnv($keyword)
+
+    public function layDanhSachNhanVien()
     {
-        $dbcon = DATABASE::connect();
-        try {
-            $sql = "SELECT * FROM nhanvien WHERE manv LIKE :keyword";
-            $cmd = $dbcon->prepare($sql);
-            $cmd->bindValue(":keyword", "{$keyword}%", PDO::PARAM_STR);
-            $cmd->execute();
-            $result = $cmd->fetchAll(PDO::FETCH_ASSOC);
+        $result = $this->laynv();
+        $data = array();
+        foreach ($result as $nv) {
 
-            // Lọc kết quả trên PHP để chỉ giữ các sách có tên bắt đầu bằng chữ cái đầu của từ khóa
-            $filteredResult = array_filter($result, function ($item) use ($keyword) {
-                return stripos($item['manv'], $keyword) === 0;
-            });
+            $employeeData = array(
+                "id" => $nv["id"],
+                "manv" => $nv["manv"],
+                "hotennv" => $nv["hotennv"],
+                "hinhanh" => "../../img/Avatar/" . $nv["hinhanh"]
 
-            return $filteredResult;
-        } catch (PDOException $e) {
-            // Xử lý lỗi nếu cần
-            return null;
+            );
+            $data[] = $employeeData;
         }
+        return json_encode($data);
     }
-    
 }
 
 ?>

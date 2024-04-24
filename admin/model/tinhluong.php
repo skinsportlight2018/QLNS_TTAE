@@ -12,7 +12,7 @@ class TinhLuong {
         return $arrNV;
     }
 
-    public function tinhLuongNhanVien($maluong, $manhanvien, $soNgayCong, $phuCap, $tamUng, $moTa, $ngayTinhLuong) {
+    public function tinhLuongNhanVien($maluong, $manhanvien, $soNgayCong, $tamUng, $moTa, $ngayTinhLuong) {
         $luongThang = 0;
         $tongKhoanTru = 0;
         $tamUngChoPhep = 0;
@@ -35,7 +35,7 @@ class TinhLuong {
         if (empty($error)) {
             $luongNgayQuery = "SELECT luongngay FROM nhanvien nv, chucvu cv WHERE nv.chucvu_id = cv.id AND nv.id = $manhanvien";
             $luongNgayResult = DATABASE::execute_query($luongNgayQuery);
-            $rowLuongNgay = $luongNgayResult[0];
+            $rowLuongNgay = $luongNgayResult->fetch(PDO::FETCH_ASSOC);
             $getLuongNgay = $rowLuongNgay['luongngay'];
 
             if ($soNgayCong < 23) 

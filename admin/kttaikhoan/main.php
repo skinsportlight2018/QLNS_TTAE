@@ -437,20 +437,6 @@ mysqli_close($conn);
 		<div class="card-body">
 			<div class="table-responsive">
 
-				<div class="mb-4 d-flex align-items-center">
-					<a href="../qltinhluong/index.php" class="btn btn-primary mr-2">
-						<i class="bi bi-file-earmark-plus px-0.5"></i>Tính lương
-					</a>
-					<a href="exportLuong.php" class="btn btn-info mr-2">
-						<i class="bi bi-file-earmark-excel-fill px-0.5"></i>Excel
-					</a>
-					<button type="button" class="btn btn-search" onclick="searchByMonth()">
-						<i class="bi bi-search"></i>
-					</button>
-					<input type="month" class="form-control" id="searchMonth" name="searchMonth" style="width: 195px;margin-left:10px;">
-				</div>
-
-
 				<table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
     <thead>
         <tr>

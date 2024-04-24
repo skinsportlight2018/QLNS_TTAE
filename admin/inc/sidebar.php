@@ -25,6 +25,7 @@
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" />
 	<link href="../inc/css/sidebar.css" rel="stylesheet">
 	<link href="../inc/css/datatable.css" rel="stylesheet">
+	<link href="../inc/css/styles.css" rel="stylesheet">
 
 	<!-- SweetAlert2 CSS -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
@@ -33,6 +34,8 @@
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
 
 	<script src="../js/message.js"></script>
+	<link href="../inc/css/breadcrumb .css" rel="stylesheet">
+
 
 </head>
 
@@ -64,31 +67,34 @@
 					<i class="fas fa-fw fa-tachometer-alt"></i>
 					<span>Tổng quan</span></a>
 			</li>
+			<?php if (isset($_SESSION["taikhoan"]) && $_SESSION["taikhoan"]["quyen"] == 1 || $_SESSION["taikhoan"]["quyen"] == 2) { ?>
 
-			<!-- Divider -->
-			<hr class="sidebar-divider my-0">
+				<!-- Divider -->
+				<hr class="sidebar-divider my-0">
 
-			<!-- Nav Item - Pages Collapse Menu -->
-			<li class="nav-item">
-				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseNhanVien" aria-expanded="true" aria-controls="collapseNhanVien">
-					<i class="bi bi-person-fill"></i>
-					<span>Nhân viên</span>
-				</a>
-				<div id="collapseNhanVien" class="collapse" aria-labelledby="headingNhanVien" data-parent="#accordionSidebar">
-					<div class="bg-white py-2 collapse-inner rounded">
-						<a class="collapse-item" href="../qlnhanvien/index.php">Danh sách nhân viên</a>
-						<a class="collapse-item" href="../qlloainhanvien/index.php">Hình thức nhân viên</a>
-						<a class="collapse-item" href="../qlchucvu/index.php">Chức vụ</a>
-						<a class="collapse-item" href="../qltrinhdo/index.php">Trình độ</a>
-						<a class="collapse-item" href="../qlchuyenmon/index.php">Chuyên môn</a>
-						<a class="collapse-item" href="../qlbangcap/index.php">Bằng cấp</a>
-						<a class="collapse-item" href="../qlquoctich/index.php">Quốc tịch</a>
-						<a class="collapse-item" href="../qldantoc/index.php">Dân tộc</a>
-						<a class="collapse-item" href="../qltongiao/index.php">Tôn giáo</a>
+				<!-- Nav Item - Pages Collapse Menu -->
+				<li class="nav-item">
+					<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseNhanVien" aria-expanded="true" aria-controls="collapseNhanVien">
+						<i class="bi bi-person-fill"></i>
+						<span>Nhân viên</span>
+					</a>
+					<div id="collapseNhanVien" class="collapse" aria-labelledby="headingNhanVien" data-parent="#accordionSidebar">
+						<div class="bg-white py-2 collapse-inner rounded">
+							<a class="collapse-item" href="../qlnhanvien/index.php">Danh sách nhân viên</a>
+							<a class="collapse-item" href="../qlloainhanvien/index.php">Hình thức nhân viên</a>
+							<a class="collapse-item" href="../qlchucvu/index.php">Chức vụ</a>
+							<a class="collapse-item" href="../qltrinhdo/index.php">Trình độ</a>
+							<a class="collapse-item" href="../qlchuyenmon/index.php">Chuyên môn</a>
+							<a class="collapse-item" href="../qlbangcap/index.php">Bằng cấp</a>
+							<a class="collapse-item" href="../qlquoctich/index.php">Quốc tịch</a>
+							<a class="collapse-item" href="../qldantoc/index.php">Dân tộc</a>
+							<a class="collapse-item" href="../qltongiao/index.php">Tôn giáo</a>
 
+						</div>
 					</div>
-				</div>
-			</li>
+				</li>
+			<?php } ?>
+
 			<!-- Divider -->
 			<hr class="sidebar-divider my-0">
 
@@ -100,11 +106,40 @@
 				</a>
 				<div id="collapseLuong" class="collapse" aria-labelledby="headingLuong" data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" href="../qltinhluong/index.php">Tính lương</a>
 						<a class="collapse-item" href="../qlluong/index.php">Bảng lương</a>
-						<a class="collapse-item" href="../qlbangchamcong/bangchamcong.php">Bảng chấm công</a>
+
+						<a class="collapse-item" href="../qlluong/index.php">Bảng lương</a>
+					</div>
+				</div>
+
+
+
+			</li>
+
+			<!-- Divider -->
+			<hr class="sidebar-divider my-0">
+
+			<!-- Nav Item - Utilities Collapse Menu -->
+			<li class="nav-item">
+				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseChamcong" aria-expanded="true" aria-controls="collapseChamcong">
+					<i class="bi bi-pencil-square"></i>
+					<span>Chấm công</span>
+				</a>
+				<div id="collapseChamcong" class="collapse" aria-labelledby="headingChamcong" data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" href="../qldschamcong/index.php?action=them">Chấm công</a>
+						<a class="collapse-item" href="../qlbangchamcong/index.php">Bảng chấm công</a>
+
+						<?php if (isset($_SESSION["taikhoan"]) && $_SESSION["taikhoan"]["quyen"] == 1 || $_SESSION["taikhoan"]["quyen"] == 2) { ?>
+							<a class="collapse-item" href="../qlchamcong/index.php">Duyệt chấm công</a>
+						<?php } ?>
+
+						<a class="collapse-item" href="../qldschamcong/index.php">Danh sách chấm công</a>
 					</div>
 				</div>
 			</li>
+
 
 			<!-- Divider -->
 			<hr class="sidebar-divider my-0">
@@ -156,32 +191,35 @@
 				</div>
 			</li>
 
-			<!-- Divider -->
-			<hr class="sidebar-divider my-0">
+			<?php if (isset($_SESSION["taikhoan"]) && $_SESSION["taikhoan"]["quyen"] == 1) { ?>
+				<!-- Divider -->
+				<hr class="sidebar-divider my-0">
 
-			<!-- Nav Item - Tables -->
-			<li class="nav-item">
-				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAccount" aria-expanded="true" aria-controls="collapseAccount">
-					<i class="bi bi-gear-fill"></i>
-					<span>Tài khoản</span>
-				</a>
-				<?php if (isset($_SESSION["taikhoan"]) && $_SESSION["taikhoan"]["quyen"] == 1) { ?>
-					<div id="collapseAccount" class="collapse <?php if (strpos($_SERVER['REQUEST_URI'], "qltaikhoan") != false) echo "active"; ?>" aria-labelledby="headingAccount" data-parent="#accordionSidebar">
+				<!-- Nav Item - Tables -->
+				<li class="nav-item">
+
+					<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAccount" aria-expanded="true" aria-controls="collapseAccount">
+						<i class="bi bi-gear-fill"></i>
+						<span>Tài khoản</span>
+					</a>
+
+					<div id="collapseAccount" class="collapse <?php if (strpos($_SERVER['REQUEST_URI'], "qltaikhoan") !== false) echo "active"; ?>" aria-labelledby="headingAccount" data-parent="#accordionSidebar">
 						<div class="bg-white py-2 collapse-inner rounded">
-							<a class="collapse-item" href="../qltaikhoan/index.php">Danh tài khoản</a>
+							<a class="collapse-item " href="../qltaikhoan/index.php">Danh sách tài khoản</a>
 						</div>
 					</div>
 				<?php } ?>
-			</li>
+
+				</li>
 
 
-			<!-- Divider -->
-			<hr class="sidebar-divider d-none d-md-block">
+				<!-- Divider -->
+				<hr class="sidebar-divider d-none d-md-block">
 
-			<!-- Sidebar Toggler (Sidebar) -->
-			<div class=" d-none d-md-inline" style="margin-left: 30px;">
-				<button class="rounded-circle border-0" id="sidebarToggle"></button>
-			</div>
+				<!-- Sidebar Toggler (Sidebar) -->
+				<div class="text-center d-none d-md-inline">
+					<button class="rounded-circle border-0" id="sidebarToggle"></button>
+				</div>
 
 
 		</ul>

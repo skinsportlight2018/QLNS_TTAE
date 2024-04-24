@@ -106,7 +106,7 @@ class TAIKHOAN{
 		$db = DATABASE::connect();
 		try{
 
-			$sql = "UPDATE taikhoan set ho=:ho, ten=:ten, hinhanh=:hinhanh, email=:email, sdt=:sdt, where id=:id";
+			$sql = "UPDATE taikhoan set ho=:ho, ten=:ten, hinhanh=:hinhanh, email=:email, sdt=:sdt where id=:id";
 			$cmd = $db->prepare($sql);
 			$cmd->bindValue(':id',$id);
             $cmd->bindValue(':ho',$ho);

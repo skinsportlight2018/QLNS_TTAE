@@ -3,7 +3,6 @@
 require("../model/database.php");
 require("../model/taikhoan.php");
 require("../model/nhanvien.php");
-
 require("../model/quoctich.php");
 require("../model/bangcap.php");
 require("../model/tongiao.php");
@@ -12,6 +11,8 @@ require("../model/trinhdo.php");
 require("../model/chuyenmon.php");
 require("../model/chucvu.php");
 require("../model/dantoc.php");
+require("../model/luong.php");
+require("../model/chamcong.php");
 
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -43,6 +44,8 @@ $cm = new CHUYENMON();
 $bc = new BANGCAP();
 $cv = new CHUCVU();
 
+$l = new LUONG();
+
 switch($action){
     case "macdinh":
 
@@ -53,18 +56,6 @@ switch($action){
         // Lấy dữ liệu bảng chấm công trong tháng này
         if ($nvien) {
             $nhanvien = $nvien->laynv();
-        }
-        // Kiểm tra nếu $nhanvien và $chamcong không null trước khi sử dụng
-        if ($nhanvien && $chamcong) {
-            $tongCongNhanVien = array();
-            foreach ($nhanvien as $nv) {
-                $tongCong = $cc->tongcongNhanVien($nv['id'], $currentMonth, $currentYear);
-                $tongCongNhanVien[$nv['id']] = $tongCong;
-            }
-            include("main.php");
-        } else {
-            // Xử lý trường hợp không có dữ liệu trả về từ DB
-            echo "Không có dữ liệu nhân viên hoặc chấm công.";
         }
 
         include("main.php");

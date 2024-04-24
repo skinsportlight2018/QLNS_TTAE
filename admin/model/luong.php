@@ -193,19 +193,16 @@ class LUONG
             $sql = "INSERT INTO luong(maluong, 
                                 nhanvien_id,
                                 ngaycong,
-                                phucap,
                                 ngaychamcong)
                     VALUES(:maluong,
                             :nhanvien_id, 
                             :ngaycong, 
-                            :phucap,
                             :ngaychamcong)";
     
             $cmd = $dbcon->prepare($sql);
             $cmd->bindValue(":maluong", $l->getmaluong());
             $cmd->bindValue(":nhanvien_id", $l->getnhanvien_id());
             $cmd->bindValue(":ngaycong", $l->getngaycong());
-            $cmd->bindValue(":phucap", $l->getphucap());
             $cmd->bindValue(":ngaychamcong", $l->getngaychamcong());
     
             $result = $cmd->execute();
@@ -226,6 +223,30 @@ class LUONG
         $row = $cmd->fetch(PDO::FETCH_ASSOC);
         return $row['count'];
     }
-  
+    
+    public function layLuongTheoNgay($thang, $nam)
+    {
+        $dbcon = DATABASE::connect();
+        try {
+            // Tạo chuỗi ngày bắt đầu và kết thúc cho tháng được chỉ định
+            $start_date = date("Y-m-01", strtotime("$nam-$thang"));
+            $end_date = date("Y-m-t", strtotime("$nam-$thang")); // Lấy ngày cuối cùng của tháng
+
+            $sql = "SELECT l.*, nv.hotennv, cv.tenchucvu
+            FROM luong l 
+            INNER JOIN nhanvien nv ON l.nhanvien_id = nv.id 
+            INNER JOIN chucvu cv ON nv.chucvu_id = cv.id
+            WHERE l.ngaychamcong BETWEEN :start_date AND :end_date";
+            $cmd = $dbcon->prepare($sql);
+            $cmd->bindValue(":start_date", $start_date);
+            $cmd->bindValue(":end_date", $end_date);
+            $cmd->execute();
+            $result = $cmd->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        } catch (PDOException $e) {
+            error_log("Lỗi truy vấn: " . $e->getMessage());
+            return null;
+        }
+    }
 }
 ?>

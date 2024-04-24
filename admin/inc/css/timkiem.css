@@ -1,0 +1,70 @@
+#searchResultsContainer {
+    position: absolute;
+    top: 100%; 
+    left: 0; /* Đưa container về bên trái */
+    z-index: 1000;
+    background-color: #fff;
+    border-radius: 4px;
+    max-height: 300px;
+    overflow-y: auto;
+
+    /* Để đứng ngay dưới thanh tìm kiếm */
+    margin-top: 5px; /* Điều chỉnh khoảng cách giữa thanh tìm kiếm và container kết quả */
+}
+
+.no-results {
+    text-align: left; 
+    color: #2C3D57 !important; 
+    margin-left: 15px; 
+
+}
+
+
+.list-group-item.link-class {
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.list-group-item.hover-effect {
+    background-color: #2C3D57 !important;
+}
+
+.list-group-item .avatar {
+    margin-right: 10px;
+}
+
+.list-group-item .employee-info {
+    color: #2C3D57;
+    font-weight: 501;
+}
+
+.list-group-item.hover-effect .employee-info {
+    color: white !important;
+}
+
+.search-button {
+    background-color: #2C3D57;
+    border-radius: 5px;
+    padding: 2px;
+}
+
+.search-button lord-icon {
+    display: block;
+}
+
+.navbar-search {
+    background-color: #2C3D57;
+    border: none;
+    border-radius: 5px;
+    padding: 2px;
+}
+
+.navbar-search .input-group {
+    border: none;
+}
+
+.navbar-search .form-control {
+    border: none;
+    background-color: rgb(255, 255, 255);
+    padding-right: 0;
+}

@@ -37,11 +37,42 @@
 <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
 
+
 <script>
     $(document).ready(function() {
-        $('#myTable').DataTable();
+        $('#myTable').DataTable({
+            "language": {
+                "emptyTable": "Không có dữ liệu trong bảng",
+                "info": "Hiển thị _START_ đến _END_ của _TOTAL_ mục",
+                "infoEmpty": "Không có dữ liệu khả dụng",
+                "infoFiltered": "(được lọc từ tổng số _MAX_ bản ghi)",
+                "lengthMenu": "Hiển thị _MENU_ bản ghi mỗi trang",
+                "loadingRecords": "Đang tải dữ liệu...",
+                "processing": "Đang xử lý...",
+                "search": "Tìm kiếm:",
+                "zeroRecords": "Không tìm thấy kết quả phù hợp",
+                "paginate": {
+                    "first": "Đầu",
+                    "last": "Cuối",
+                    "next": "Tiếp",
+                    "previous": "Trước"
+                },
+            }
+        });
     });
+
+    function searchByMonth() {
+        var searchMonth = document.getElementById("searchMonth").value;
+        // Phân chia giá trị của searchMonth thành tháng và năm
+        var parts = searchMonth.split("-");
+        var thang = parts[1];
+        var nam = parts[0];
+
+        // Chuyển hướng trang đến URL với thông tin tháng và năm
+        window.location.href = "index.php?action=timkiem&thang=" + thang + "&nam=" + nam;
+    }
 </script>
+
 </body>
 
 </html>
