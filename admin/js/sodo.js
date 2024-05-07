@@ -8,7 +8,7 @@ function getChartData() {
 }
 
 // Vẽ biểu đồ sau khi nhận được dữ liệu
-getChartData().done(function(data) {
+getChartData().done(function (data) {
     var chartCanvas = document.getElementById('myChart');
     if (chartCanvas) {
         var ctx = chartCanvas.getContext('2d');
@@ -45,6 +45,6 @@ getChartData().done(function(data) {
     } else {
         console.error("Không tìm thấy phần tử 'myChart'");
     }
-}).fail(function(jqXHR, textStatus, errorThrown) {
+}).fail(function (jqXHR, textStatus, errorThrown) {
     console.error("Lỗi khi lấy dữ liệu:", textStatus, errorThrown);
 });
