@@ -4,7 +4,6 @@ class TRINHDO
     private $id;
     private $matrinhdo;
     private $tentrinhdo;
-    private $ghichu;
 
     public function getid()
     {
@@ -34,16 +33,6 @@ class TRINHDO
     public function settentrinhdo($value)
     {
         $this->tentrinhdo = $value;
-    }
-
-    public function getghichu()
-    {
-        return $this->ghichu;
-    }
-
-    public function setghichu($value)
-    {
-        $this->ghichu = $value;
     }
 
     public function laytrinhdo()
@@ -83,7 +72,6 @@ class TRINHDO
     {
         $dbcon = DATABASE::connect();
         try {
-            // Kiểm tra xem mã chuyên môn đã tồn tại chưa
             $sql_check_ma = "SELECT COUNT(*) AS count FROM trinhdo WHERE matrinhdo = :matrinhdo";
             $cmd_check_ma = $dbcon->prepare($sql_check_ma);
             $cmd_check_ma->bindValue(":matrinhdo", $trinhdo->getmatrinhdo());
@@ -91,7 +79,6 @@ class TRINHDO
             $row_ma = $cmd_check_ma->fetch(PDO::FETCH_ASSOC);
             $existing_count_ma = $row_ma['count'];
 
-            // Kiểm tra xem tên chuyên môn đã tồn tại chưa
             $sql_check_ten = "SELECT COUNT(*) AS count FROM trinhdo WHERE tentrinhdo = :tentrinhdo";
             $cmd_check_ten = $dbcon->prepare($sql_check_ten);
             $cmd_check_ten->bindValue(":tentrinhdo", $trinhdo->gettentrinhdo());
@@ -100,20 +87,16 @@ class TRINHDO
             $existing_count_ten = $row_ten['count'];
 
             if ($existing_count_ma > 0) {
-                // Mã chuyên môn đã tồn tại, trả về thông báo lỗi
                 return "Mã trình độ đã tồn tại.";
             } elseif ($existing_count_ten > 0) {
-                // Tên chuyên môn đã tồn tại, trả về thông báo lỗi
                 return "Tên trình độ đã tồn tại.";
             } else {
-                // Lấy số lượng bản ghi hiện tại trong bảng chuyenmon
                 $sql_count = "SELECT COUNT(*) AS count FROM trinhdo";
                 $cmd_count = $dbcon->prepare($sql_count);
                 $cmd_count->execute();
                 $row_count = $cmd_count->fetch(PDO::FETCH_ASSOC);
                 $rowCount = $row_count['count'];
 
-                // Tiến hành thêm mới với STT là số lượng bản ghi hiện tại + 1
                 $sql_insert = "INSERT INTO trinhdo(id, matrinhdo, tentrinhdo) VALUES(:id, :matrinhdo, :tentrinhdo)";
                 $cmd_insert = $dbcon->prepare($sql_insert);
                 $cmd_insert->bindValue(":id", $rowCount + 1);

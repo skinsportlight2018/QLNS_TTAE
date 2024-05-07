@@ -106,7 +106,7 @@
         {
             $dbcon = DATABASE::connect();
             try {
-                $sql = "SELECT * FROM congtac WHERE nhanvien_id = :nhanvien_id"; 
+                $sql = "SELECT * FROM congtac WHERE nhanvien_id = :nhanvien_id";
                 $cmd = $dbcon->prepare($sql);
                 $cmd->bindValue(":nhanvien_id", $nhanvien_id, PDO::PARAM_INT);
                 $cmd->execute();
@@ -140,16 +140,15 @@
         {
             $dbcon = DATABASE::connect();
             try {
-                if ($this->kiemTraMaCongTacTonTai($ct->getmacongtac())) 
-                {
-                return "Mã công tác đã tồn tại.";
-                }   
-                // Lấy số lượng bản ghi hiện tại trong bảng nhanvien
                 $currentRowCount = $this->laySoLuongBanGhiHienTai();
-        
+
+                if ($ct->getngaybd() > $ct->getngaykt()) {
+                    return false;
+                }
+
                 $sql = "INSERT INTO congtac(macongtac, nhanvien_id, ngaybd, ngaykt, diadiem, nhiemvu_congtac, ghichu) 
                         VALUES(:macongtac, :nhanvien_id, :ngaybd, :ngaykt, :diadiem, :nhiemvu_congtac, :ghichu)";
-        
+
                 $cmd = $dbcon->prepare($sql);
                 $cmd->bindValue(":macongtac", $ct->getmacongtac());
                 $cmd->bindValue(":nhanvien_id", $ct->getnhanvien_id());
@@ -158,7 +157,7 @@
                 $cmd->bindValue(":diadiem", $ct->getdiadiem());
                 $cmd->bindValue(":nhiemvu_congtac", $ct->getnhiemvu_congtac());
                 $cmd->bindValue(":ghichu", $ct->getghichu());
-        
+
                 $result = $cmd->execute();
                 return $result;
             } catch (PDOException $e) {
@@ -166,31 +165,6 @@
                 echo "<p>Lỗi truy vấn: $error_message</p>";
                 exit();
             }
-        }
-
-        private function kiemTraMaCongTacTonTai($macongtac)
-        {
-            $dbcon = DATABASE::connect();
-            $sql = "SELECT COUNT(*) AS count FROM congtac WHERE macongtac = :macongtac";
-            $cmd = $dbcon->prepare($sql);
-            $cmd->bindValue(":macongtac", $macongtac);
-            $cmd->execute();
-            $row = $cmd->fetch(PDO::FETCH_ASSOC);
-            $existing_count = $row['count'];
-            return $existing_count > 0;
-        }
-
-        private function kiemTraMaCongTacTonTai1($manv, $currentId)
-        {
-            $dbcon = DATABASE::connect();
-            $sql = "SELECT COUNT(*) AS count FROM congtac WHERE macongtac = :macongtac AND id != :currentId";
-            $cmd = $dbcon->prepare($sql);
-            $cmd->bindValue(":manv", $manv);
-            $cmd->bindValue(":currentId", $currentId);
-            $cmd->execute();
-            $row = $cmd->fetch(PDO::FETCH_ASSOC);
-            $existing_count = $row['count'];
-            return $existing_count > 0;
         }
 
         private function laySoLuongBanGhiHienTai()
@@ -225,10 +199,10 @@
         public function suacongtac($ct)
         {
             $dbcon = DATABASE::connect();
-            try {             
-                    $currentRowCount = $this->laySoLuongBanGhiHienTai();
+            try {
+                $currentRowCount = $this->laySoLuongBanGhiHienTai();
 
-                    $sql = "UPDATE congtac SET macongtac=:macongtac,
+                $sql = "UPDATE congtac SET macongtac=:macongtac,
                                                 nhanvien_id=:nhanvien_id, 
                                                 ngaybd=:ngaybd, 
                                                 ngaykt=:ngaykt, 
@@ -236,25 +210,25 @@
                                                 nhiemvu_congtac=:nhiemvu_congtac,
                                                 ghichu=:ghichu 
                                                 WHERE id=:id";
-                    $cmd = $dbcon->prepare($sql);
-                    $cmd->bindValue(":macongtac", $ct->getmacongtac());
-                    $cmd->bindValue(":nhanvien_id", $ct->getnhanvien_id());
-                    $cmd->bindValue(":ngaybd", $ct->getngaybd());
-                    $cmd->bindValue(":ngaykt", $ct->getngaykt());
-                    $cmd->bindValue(":diadiem", $ct->getdiadiem());
-                    $cmd->bindValue(":nhiemvu_congtac", $ct->getnhiemvu_congtac());
-                    $cmd->bindValue(":ghichu", $ct->getghichu());
-                    $cmd->bindValue(":id", $ct->getid());
-            
-                    $result = $cmd->execute();
-                    return $result;
+                $cmd = $dbcon->prepare($sql);
+                $cmd->bindValue(":macongtac", $ct->getmacongtac());
+                $cmd->bindValue(":nhanvien_id", $ct->getnhanvien_id());
+                $cmd->bindValue(":ngaybd", $ct->getngaybd());
+                $cmd->bindValue(":ngaykt", $ct->getngaykt());
+                $cmd->bindValue(":diadiem", $ct->getdiadiem());
+                $cmd->bindValue(":nhiemvu_congtac", $ct->getnhiemvu_congtac());
+                $cmd->bindValue(":ghichu", $ct->getghichu());
+                $cmd->bindValue(":id", $ct->getid());
+
+                $result = $cmd->execute();
+                return $result;
             } catch (PDOException $e) {
                 $error_message = $e->getMessage();
                 echo "<p>Lỗi truy vấn: $error_message</p>";
                 exit();
             }
         }
-        
+
         public function timkiemnv($keyword)
         {
             $dbcon = DATABASE::connect();
@@ -265,14 +239,12 @@
                 $cmd->execute();
                 $result = $cmd->fetchAll(PDO::FETCH_ASSOC);
 
-                // Lọc kết quả trên PHP để chỉ giữ các sách có tên bắt đầu bằng chữ cái đầu của từ khóa
                 $filteredResult = array_filter($result, function ($item) use ($keyword) {
                     return stripos($item['manv'], $keyword) === 0;
                 });
 
                 return $filteredResult;
             } catch (PDOException $e) {
-                // Xử lý lỗi nếu cần
                 return null;
             }
         }
@@ -285,9 +257,13 @@
                 $result = $dbcon->query($sql);
                 return $result->fetchColumn();
             } catch (PDOException $e) {
-                // Xử lý lỗi nếu cần
                 return 0;
             }
         }
+
+        public function kiemTraNgay($ngaybd, $ngaykt)
+        {
+            return $ngaybd > $ngaykt;
+        }
     }
-?>
+    ?>

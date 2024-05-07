@@ -61,7 +61,6 @@ class QUOCTICH
     {
         $dbcon = DATABASE::connect();
         try {
-            // Kiểm tra xem tên chuyên môn đã tồn tại chưa
             $sql_check_ten = "SELECT COUNT(*) AS count FROM quoctich WHERE tenquoctich = :tenquoctich";
             $cmd_check_ten = $dbcon->prepare($sql_check_ten);
             $cmd_check_ten->bindValue(":tenquoctich", $quoctich->gettenquoctich());
@@ -70,17 +69,14 @@ class QUOCTICH
             $existing_count_ten = $row_ten['count'];
 
             if ($existing_count_ten > 0) {
-                // Mã chuyên môn đã tồn tại, trả về thông báo lỗi
                 return "Mã quốc tịch đã tồn tại.";
             } else {
-                // Lấy số lượng bản ghi hiện tại trong bảng chuyenmon
                 $sql_count = "SELECT COUNT(*) AS count FROM quoctich";
                 $cmd_count = $dbcon->prepare($sql_count);
                 $cmd_count->execute();
                 $row_count = $cmd_count->fetch(PDO::FETCH_ASSOC);
                 $rowCount = $row_count['count'];
 
-                // Tiến hành thêm mới với STT là số lượng bản ghi hiện tại + 1
                 $sql_insert = "INSERT INTO quoctich(id, tenquoctich) VALUES(:id, :tenquoctich)";
                 $cmd_insert = $dbcon->prepare($sql_insert);
                 $cmd_insert->bindValue(":id", $rowCount + 1);
@@ -132,4 +128,3 @@ class QUOCTICH
         }
     }
 }
-?>

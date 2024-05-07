@@ -1,5 +1,6 @@
 <?php
-class CHAMCONG{
+class CHAMCONG
+{
     private $id;
     private $nhanvien_id;
     private $ngaycong;
@@ -8,59 +9,73 @@ class CHAMCONG{
     private $lydo;
     private $tongcong;
 
-    public function getid(){
+    public function getid()
+    {
         return $this->id;
     }
 
-    public function setid($value){
+    public function setid($value)
+    {
         $this->id = $value;
     }
 
-    public function getnhanvien_id(){
+    public function getnhanvien_id()
+    {
         return $this->nhanvien_id;
     }
 
-    public function setnhanvien_id($value){
+    public function setnhanvien_id($value)
+    {
         $this->nhanvien_id = $value;
     }
 
-    public function getngaycong(){
+    public function getngaycong()
+    {
         return $this->ngaycong;
     }
 
-    public function setngaycong($value){
+    public function setngaycong($value)
+    {
         $this->ngaycong = $value;
     }
 
-    public function getgio(){
+    public function getgio()
+    {
         return $this->gio;
     }
 
-    public function setgio($value){
+    public function setgio($value)
+    {
         $this->gio = $value;
     }
 
-    public function gettrangthai(){
+    public function gettrangthai()
+    {
         return $this->trangthai;
     }
 
-    public function settrangthai($value){
+    public function settrangthai($value)
+    {
         $this->trangthai = $value;
     }
 
-    public function getlydo(){
+    public function getlydo()
+    {
         return $this->lydo;
     }
 
-    public function setlydo($value){
+    public function setlydo($value)
+    {
         $this->lydo = $value;
     }
 
-    public function gettongcong(){
+    public function gettongcong()
+    {
         return $this->tongcong;
     }
 
-    public function settongcong($value){
+    public function settongcong($value)
+    {
         $this->tongcong = $value;
     }
 
@@ -117,11 +132,10 @@ class CHAMCONG{
     {
         $dbcon = DATABASE::connect();
         try {
-            $currentRowCount = $this->laySoLuongBanGhiHienTai();
 
             $sql = "INSERT INTO chamcong(nhanvien_id, ngaycong, gio, lydo) 
                 VALUES(:nhanvien_id, :ngaycong, :gio, :lydo)";
-                
+
             $cmd = $dbcon->prepare($sql);
             $cmd->bindValue(":nhanvien_id", $chamcong->getnhanvien_id());
             $cmd->bindValue(":ngaycong", $chamcong->getngaycong());
@@ -133,8 +147,26 @@ class CHAMCONG{
             $error_message = $e->getMessage();
             echo "<p>Lỗi truy vấn: $error_message</p>";
             exit();
-        } 
-    } 
+        }
+    }
+
+    public function laychamcongtheonvNgay($nhanvien_id, $ngaycong)
+    {
+        $dbcon = DATABASE::connect();
+        try {
+            $sql = "SELECT * FROM chamcong WHERE nhanvien_id = :nhanvien_id AND ngaycong = :ngaycong";
+            $cmd = $dbcon->prepare($sql);
+            $cmd->bindValue(":nhanvien_id", $nhanvien_id, PDO::PARAM_INT);
+            $cmd->bindValue(":ngaycong", $ngaycong);
+            $cmd->execute();
+            $result = $cmd->fetch(PDO::FETCH_ASSOC);
+            return $result;
+        } catch (PDOException $e) {
+            error_log("Lỗi truy vấn: " . $e->getMessage());
+            return null;
+        }
+    }
+
 
     // Xóa 
     public function xoachamcong($chamcong)
@@ -154,45 +186,26 @@ class CHAMCONG{
         }
     }
 
-    // Cập nhật
-    public function suachamcong($chamcong)
+    // Đổi trạng thái (0 khóa, 1 kích hoạt)
+    public function doitrangthai($id, $trangthai)
     {
-        $dbcon = DATABASE::connect();
+        $db = DATABASE::connect();
         try {
-            $sql = "UPDATE chamcong SET nhanvien_id=:nhanvien_id, ngaycong=:ngaycong, gio=:gio, lydo=:lydo WHERE id=:id";
-            $cmd = $dbcon->prepare($sql);
-            $cmd->bindValue(":nhanvien_id", $chamcong->getnhanvien_id());
-            $cmd->bindValue(":ngaycong", $chamcong->getngaycong());
-            $cmd->bindValue(":gio", $chamcong->getgio());
-            $cmd->bindValue(":lydo", $chamcong->getlydo());
-            $result = $cmd->execute();
-            return $result;
+            $sql = "UPDATE chamcong set trangthai=:trangthai where id=:id";
+            $cmd = $db->prepare($sql);
+            $cmd->bindValue(':id', $id);
+            $cmd->bindValue(':trangthai', $trangthai);
+            $ketqua = $cmd->execute();
+            return $ketqua;
         } catch (PDOException $e) {
             $error_message = $e->getMessage();
             echo "<p>Lỗi truy vấn: $error_message</p>";
             exit();
         }
-    }    
+    }
 
-    // Đổi trạng thái (0 khóa, 1 kích hoạt)
-	public function doitrangthai($id,$trangthai){
-		$db = DATABASE::connect();
-		try{
-			$sql = "UPDATE chamcong set trangthai=:trangthai where id=:id";
-			$cmd = $db->prepare($sql);
-			$cmd->bindValue(':id',$id);
-			$cmd->bindValue(':trangthai',$trangthai);
-			$ketqua = $cmd->execute();            
-            return $ketqua;
-		}
-		catch(PDOException $e){
-			$error_message=$e->getMessage();
-			echo "<p>Lỗi truy vấn: $error_message</p>";
-			exit();
-		}
-	}
-
-    public function laySoLuongBanGhiHienTai() {
+    public function laySoLuongBanGhiHienTai()
+    {
         $dbcon = DATABASE::connect();
         try {
             $sql = "SELECT COUNT(*) AS count FROM chamcong";
@@ -205,7 +218,7 @@ class CHAMCONG{
             echo "<p>Lỗi truy vấn: $error_message</p>";
             exit();
         }
-    }    
+    }
 
     public function tongcongNhanVien($nhanvien_id, $month, $year)
     {
@@ -220,10 +233,7 @@ class CHAMCONG{
             $result = $cmd->fetch(PDO::FETCH_ASSOC);
             return $result['tong_cong'];
         } catch (PDOException $e) {
-            // Ném ra một exception khi có lỗi truy vấn
             throw new Exception("Lỗi truy vấn: " . $e->getMessage());
         }
     }
-
 }
-?>

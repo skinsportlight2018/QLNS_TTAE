@@ -61,7 +61,6 @@ class TONGIAO
     {
         $dbcon = DATABASE::connect();
         try {
-            // Kiểm tra xem tên chuyên môn đã tồn tại chưa
             $sql_check_ten = "SELECT COUNT(*) AS count FROM tongiao WHERE tentongiao = :tentongiao";
             $cmd_check_ten = $dbcon->prepare($sql_check_ten);
             $cmd_check_ten->bindValue(":tentongiao", $tongiao->gettentongiao());
@@ -70,17 +69,14 @@ class TONGIAO
             $existing_count_ten = $row_ten['count'];
 
             if ($existing_count_ten > 0) {
-                // Mã chuyên môn đã tồn tại, trả về thông báo lỗi
                 return "Mã tôn giáo đã tồn tại.";
             } else {
-                // Lấy số lượng bản ghi hiện tại trong bảng chuyenmon
                 $sql_count = "SELECT COUNT(*) AS count FROM tongiao";
                 $cmd_count = $dbcon->prepare($sql_count);
                 $cmd_count->execute();
                 $row_count = $cmd_count->fetch(PDO::FETCH_ASSOC);
                 $rowCount = $row_count['count'];
 
-                // Tiến hành thêm mới với STT là số lượng bản ghi hiện tại + 1
                 $sql_insert = "INSERT INTO tongiao(id, tentongiao) VALUES(:id, :tentongiao)";
                 $cmd_insert = $dbcon->prepare($sql_insert);
                 $cmd_insert->bindValue(":id", $rowCount + 1);

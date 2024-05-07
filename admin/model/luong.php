@@ -165,6 +165,57 @@ class LUONG
         }
     }
 
+    public function layluongtheongaycong()
+    {
+        $dbcon = DATABASE::connect();
+        try {
+            $sql = "SELECT l.*, nv.hotennv, cv.tenchucvu
+            FROM luong l 
+            INNER JOIN nhanvien nv ON l.nhanvien_id = nv.id 
+            INNER JOIN chucvu cv ON nv.chucvu_id = cv.id
+            ORDER BY l.id DESC";
+            $cmd = $dbcon->prepare($sql);
+            $cmd->execute();
+            $result = $cmd->fetchAll();
+
+            // Làm tròn giá trị ngày công
+            foreach ($result as &$row) {
+                $row['ngaycong'] = round($row['ngaycong']);
+            }
+
+            return $result;
+        } catch (PDOException $e) {
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn: $error_message</p>";
+            exit();
+        }
+    }
+
+    public function layToanBoLuongTheoNgay($nam)
+    {
+        $dbcon = DATABASE::connect();
+        try {
+            // Tạo chuỗi ngày bắt đầu và kết thúc cho năm được chỉ định
+            $start_date = date("Y-01-01", strtotime($nam));
+            $end_date = date("Y-12-t", strtotime($nam)); // Lấy ngày cuối cùng của năm
+
+            $sql = "SELECT l.*, nv.hotennv, cv.tenchucvu
+                    FROM luong l 
+                    INNER JOIN nhanvien nv ON l.nhanvien_id = nv.id 
+                    INNER JOIN chucvu cv ON nv.chucvu_id = cv.id
+                    WHERE l.ngaychamcong BETWEEN :start_date AND :end_date";
+            $cmd = $dbcon->prepare($sql);
+            $cmd->bindValue(":start_date", $start_date);
+            $cmd->bindValue(":end_date", $end_date);
+            $cmd->execute();
+            $result = $cmd->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        } catch (PDOException $e) {
+            error_log("Lỗi truy vấn: " . $e->getMessage());
+            return null;
+        }
+    }
+
     // Xóa 
     public function xoaluong($l)
     {
@@ -189,22 +240,40 @@ class LUONG
         try {
             // Lấy số lượng bản ghi hiện tại trong bảng nhanvien
             $currentRowCount = $this->laySoLuongBanGhiHienTai();
-    
+
             $sql = "INSERT INTO luong(maluong, 
                                 nhanvien_id,
+                                luongthang,
                                 ngaycong,
-                                ngaychamcong)
+                                phucap,
+                                khoannop,
+                                tamung,
+                                thuclanh,
+                                ngaychamcong,
+                                ghichu)
                     VALUES(:maluong,
                             :nhanvien_id, 
-                            :ngaycong, 
-                            :ngaychamcong)";
-    
+                            :luongthang,
+                            :ngaycong,
+                            :phucap,
+                            :khoannop,
+                            :tamung,
+                            :thuclanh,
+                            :ngaychamcong,
+                            :ghichu)";
+
             $cmd = $dbcon->prepare($sql);
             $cmd->bindValue(":maluong", $l->getmaluong());
             $cmd->bindValue(":nhanvien_id", $l->getnhanvien_id());
+            $cmd->bindValue(":luongthang", $l->getluongthang());
             $cmd->bindValue(":ngaycong", $l->getngaycong());
+            $cmd->bindValue(":phucap", $l->getphucap());
+            $cmd->bindValue(":khoannop", $l->getkhoannop());
+            $cmd->bindValue(":tamung", $l->gettamung());
+            $cmd->bindValue(":thuclanh", $l->getthuclanh());
             $cmd->bindValue(":ngaychamcong", $l->getngaychamcong());
-    
+            $cmd->bindValue(":ghichu", $l->getghichu());
+
             $result = $cmd->execute();
             return $result;
         } catch (PDOException $e) {
@@ -223,14 +292,13 @@ class LUONG
         $row = $cmd->fetch(PDO::FETCH_ASSOC);
         return $row['count'];
     }
-    
+
     public function layLuongTheoNgay($thang, $nam)
     {
         $dbcon = DATABASE::connect();
         try {
-            // Tạo chuỗi ngày bắt đầu và kết thúc cho tháng được chỉ định
             $start_date = date("Y-m-01", strtotime("$nam-$thang"));
-            $end_date = date("Y-m-t", strtotime("$nam-$thang")); // Lấy ngày cuối cùng của tháng
+            $end_date = date("Y-m-t", strtotime("$nam-$thang"));
 
             $sql = "SELECT l.*, nv.hotennv, cv.tenchucvu
             FROM luong l 
@@ -249,4 +317,3 @@ class LUONG
         }
     }
 }
-?>

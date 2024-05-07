@@ -229,7 +229,6 @@ class NHANVIEN
     {
         $dbcon = DATABASE::connect();
         try {
-            //$sql = "SELECT * FROM nhanvien";
             $sql = "SELECT n.*, cv.tenchucvu FROM nhanvien n INNER JOIN chucvu cv ON n.chucvu_id = cv.id ORDER BY id DESC";
             $cmd = $dbcon->prepare($sql);
             $cmd->execute();
@@ -246,7 +245,7 @@ class NHANVIEN
     {
         $dbcon = DATABASE::connect();
         try {
-            $sql = "SELECT * FROM nhanvien WHERE quoctich_id = :quoctich_id"; 
+            $sql = "SELECT * FROM nhanvien WHERE quoctich_id = :quoctich_id";
             $cmd = $dbcon->prepare($sql);
             $cmd->bindValue(":quoctich_id", $quoctich_id, PDO::PARAM_INT);
             $cmd->execute();
@@ -271,13 +270,11 @@ class NHANVIEN
             $result = $cmd->fetchAll(PDO::FETCH_ASSOC);
 
             if (empty($result)) {
-                // Xử lý trường hợp không có sách được tìm thấy
                 return null;
             }
 
             return $result;
         } catch (PDOException $e) {
-            // Ghi log lỗi thay vì in ra trực tiếp
             error_log("Lỗi truy vấn: " . $e->getMessage());
             return null;
         }
@@ -296,13 +293,11 @@ class NHANVIEN
             $result = $cmd->fetchAll(PDO::FETCH_ASSOC);
 
             if (empty($result)) {
-                // Xử lý trường hợp không có sách được tìm thấy
                 return null;
             }
 
             return $result;
         } catch (PDOException $e) {
-            // Ghi log lỗi thay vì in ra trực tiếp
             error_log("Lỗi truy vấn: " . $e->getMessage());
             return null;
         }
@@ -321,13 +316,11 @@ class NHANVIEN
             $result = $cmd->fetchAll(PDO::FETCH_ASSOC);
 
             if (empty($result)) {
-                // Xử lý trường hợp không có sách được tìm thấy
                 return null;
             }
 
             return $result;
         } catch (PDOException $e) {
-            // Ghi log lỗi thay vì in ra trực tiếp
             error_log("Lỗi truy vấn: " . $e->getMessage());
             return null;
         }
@@ -346,13 +339,11 @@ class NHANVIEN
             $result = $cmd->fetchAll(PDO::FETCH_ASSOC);
 
             if (empty($result)) {
-                // Xử lý trường hợp không có sách được tìm thấy
                 return null;
             }
 
             return $result;
         } catch (PDOException $e) {
-            // Ghi log lỗi thay vì in ra trực tiếp
             error_log("Lỗi truy vấn: " . $e->getMessage());
             return null;
         }
@@ -371,13 +362,11 @@ class NHANVIEN
             $result = $cmd->fetchAll(PDO::FETCH_ASSOC);
 
             if (empty($result)) {
-                // Xử lý trường hợp không có sách được tìm thấy
                 return null;
             }
 
             return $result;
         } catch (PDOException $e) {
-            // Ghi log lỗi thay vì in ra trực tiếp
             error_log("Lỗi truy vấn: " . $e->getMessage());
             return null;
         }
@@ -396,13 +385,11 @@ class NHANVIEN
             $result = $cmd->fetchAll(PDO::FETCH_ASSOC);
 
             if (empty($result)) {
-                // Xử lý trường hợp không có sách được tìm thấy
                 return null;
             }
 
             return $result;
         } catch (PDOException $e) {
-            // Ghi log lỗi thay vì in ra trực tiếp
             error_log("Lỗi truy vấn: " . $e->getMessage());
             return null;
         }
@@ -421,13 +408,11 @@ class NHANVIEN
             $result = $cmd->fetchAll(PDO::FETCH_ASSOC);
 
             if (empty($result)) {
-                // Xử lý trường hợp không có sách được tìm thấy
                 return null;
             }
 
             return $result;
         } catch (PDOException $e) {
-            // Ghi log lỗi thay vì in ra trực tiếp
             error_log("Lỗi truy vấn: " . $e->getMessage());
             return null;
         }
@@ -472,25 +457,19 @@ class NHANVIEN
     {
         $dbcon = DATABASE::connect();
         try {
-            if ($this->kiemTraMaNhanVienTonTai($nv->getmanv())) 
-            {
-                return "Mã nhân viên đã tồn tại.";
-            }
-            if ($this->kiemTraSDTTonTai($nv->getsdt()))
-            {
+            if ($this->kiemTraSDTTonTai($nv->getsdt())) {
                 return "Số điện thoại đã tồn tại.";
             }
-            if ($this->kiemTraCCCDTonTai($nv->getcccd())) 
-            {
+            if ($this->kiemTraCCCDTonTai($nv->getcccd())) {
                 return "Căn cước công dân đã tồn tại.";
             }
-    
+
             // Lấy số lượng bản ghi hiện tại trong bảng nhanvien
             $currentRowCount = $this->laySoLuongBanGhiHienTai();
-    
+
             $sql = "INSERT INTO nhanvien(manv, hotennv, hinhanh, sdt, gioitinh, ngaysinh, noisinh, cccd, noicap_cccd, ngaycap_cccd, quequan, quoctich_id, tongiao_id, dantoc_id, tamtru, loai_nv_id, trinhdo_id, chuyenmon_id, bangcap_id, chucvu_id, trangthai) 
                     VALUES(:manv, :hotennv, :hinhanh, :sdt, :gioitinh, :ngaysinh, :noisinh, :cccd, :noicap_cccd, :ngaycap_cccd, :quequan, :quoctich_id, :tongiao_id, :dantoc_id, :tamtru, :loai_nv_id, :trinhdo_id, :chuyenmon_id, :bangcap_id, :chucvu_id, :trangthai)";
-    
+
             $cmd = $dbcon->prepare($sql);
             $cmd->bindValue(":manv", $nv->getmanv());
             $cmd->bindValue(":hotennv", $nv->gethotennv());
@@ -513,7 +492,7 @@ class NHANVIEN
             $cmd->bindValue(":chucvu_id", $nv->getchucvu_id());
             $cmd->bindValue(":hinhanh", $nv->gethinhanh());
             $cmd->bindValue(":trangthai", $nv->gettrangthai());
-    
+
             $result = $cmd->execute();
             return $result;
         } catch (PDOException $e) {
@@ -521,18 +500,6 @@ class NHANVIEN
             echo "<p>Lỗi truy vấn: $error_message</p>";
             exit();
         }
-    }
-
-    private function kiemTraMaNhanVienTonTai($manv)
-    {
-        $dbcon = DATABASE::connect();
-        $sql = "SELECT COUNT(*) AS count FROM nhanvien WHERE manv = :manv";
-        $cmd = $dbcon->prepare($sql);
-        $cmd->bindValue(":manv", $manv);
-        $cmd->execute();
-        $row = $cmd->fetch(PDO::FETCH_ASSOC);
-        $existing_count = $row['count'];
-        return $existing_count > 0;
     }
 
     private function kiemTraSDTTonTai($sdt)
@@ -553,19 +520,6 @@ class NHANVIEN
         $sql = "SELECT COUNT(*) AS count FROM nhanvien WHERE cccd = :cccd";
         $cmd = $dbcon->prepare($sql);
         $cmd->bindValue(":cccd", $cccd);
-        $cmd->execute();
-        $row = $cmd->fetch(PDO::FETCH_ASSOC);
-        $existing_count = $row['count'];
-        return $existing_count > 0;
-    }
-
-    private function kiemTraMaNhanVienTonTaiSua($manv, $currentId)
-    {
-        $dbcon = DATABASE::connect();
-        $sql = "SELECT COUNT(*) AS count FROM nhanvien WHERE manv = :manv AND id != :currentId";
-        $cmd = $dbcon->prepare($sql);
-        $cmd->bindValue(":manv", $manv);
-        $cmd->bindValue(":currentId", $currentId);
         $cmd->execute();
         $row = $cmd->fetch(PDO::FETCH_ASSOC);
         $existing_count = $row['count'];
@@ -631,9 +585,9 @@ class NHANVIEN
     {
         $dbcon = DATABASE::connect();
         try {
-                $currentRowCount = $this->laySoLuongBanGhiHienTai();
+            $currentRowCount = $this->laySoLuongBanGhiHienTai();
 
-                $sql = "UPDATE nhanvien SET manv=:manv,
+            $sql = "UPDATE nhanvien SET manv=:manv,
                                             hotennv=:hotennv,
                                             hinhanh=:hinhanh,
                                             sdt=:sdt,
@@ -655,32 +609,32 @@ class NHANVIEN
                                             chucvu_id=:chucvu_id,
                                             trangthai=:trangthai
                                             WHERE id=:id";
-                $cmd = $dbcon->prepare($sql);
-                $cmd->bindValue(":manv", $nv->getmanv());
-                $cmd->bindValue(":hotennv", $nv->gethotennv());
-                $cmd->bindValue(":sdt", $nv->getsdt());
-                $cmd->bindValue(":hinhanh", $nv->gethinhanh());
-                $cmd->bindValue(":gioitinh", $nv->getgioitinh()); 
-                $cmd->bindValue(":ngaysinh", $nv->getngaysinh());
-                $cmd->bindValue(":noisinh", $nv->getnoisinh());
-                $cmd->bindValue(":cccd", $nv->getcccd());
-                $cmd->bindValue(":noicap_cccd", $nv->getnoicap_cccd());
-                $cmd->bindValue(":ngaycap_cccd", $nv->getngaycap_cccd());
-                $cmd->bindValue(":quequan", $nv->getquequan());
-                $cmd->bindValue(":quoctich_id", $nv->getquoctich_id());
-                $cmd->bindValue(":tongiao_id", $nv->gettongiao_id());
-                $cmd->bindValue(":dantoc_id", $nv->getdantoc_id());
-                $cmd->bindValue(":tamtru", $nv->gettamtru());
-                $cmd->bindValue(":loai_nv_id", $nv->getloai_nv_id());
-                $cmd->bindValue(":trinhdo_id", $nv->gettrinhdo_id());
-                $cmd->bindValue(":chuyenmon_id", $nv->getchuyenmon_id());
-                $cmd->bindValue(":bangcap_id", $nv->getbangcap_id());
-                $cmd->bindValue(":chucvu_id", $nv->getchucvu_id());
-                $cmd->bindValue(":trangthai", $nv->gettrangthai());
-                $cmd->bindValue(":id", $nv->getid());
-        
-                $result = $cmd->execute();
-                return $result;
+            $cmd = $dbcon->prepare($sql);
+            $cmd->bindValue(":manv", $nv->getmanv());
+            $cmd->bindValue(":hotennv", $nv->gethotennv());
+            $cmd->bindValue(":sdt", $nv->getsdt());
+            $cmd->bindValue(":hinhanh", $nv->gethinhanh());
+            $cmd->bindValue(":gioitinh", $nv->getgioitinh());
+            $cmd->bindValue(":ngaysinh", $nv->getngaysinh());
+            $cmd->bindValue(":noisinh", $nv->getnoisinh());
+            $cmd->bindValue(":cccd", $nv->getcccd());
+            $cmd->bindValue(":noicap_cccd", $nv->getnoicap_cccd());
+            $cmd->bindValue(":ngaycap_cccd", $nv->getngaycap_cccd());
+            $cmd->bindValue(":quequan", $nv->getquequan());
+            $cmd->bindValue(":quoctich_id", $nv->getquoctich_id());
+            $cmd->bindValue(":tongiao_id", $nv->gettongiao_id());
+            $cmd->bindValue(":dantoc_id", $nv->getdantoc_id());
+            $cmd->bindValue(":tamtru", $nv->gettamtru());
+            $cmd->bindValue(":loai_nv_id", $nv->getloai_nv_id());
+            $cmd->bindValue(":trinhdo_id", $nv->gettrinhdo_id());
+            $cmd->bindValue(":chuyenmon_id", $nv->getchuyenmon_id());
+            $cmd->bindValue(":bangcap_id", $nv->getbangcap_id());
+            $cmd->bindValue(":chucvu_id", $nv->getchucvu_id());
+            $cmd->bindValue(":trangthai", $nv->gettrangthai());
+            $cmd->bindValue(":id", $nv->getid());
+
+            $result = $cmd->execute();
+            return $result;
         } catch (PDOException $e) {
             $error_message = $e->getMessage();
             echo "<p>Lỗi truy vấn: $error_message</p>";
@@ -706,5 +660,3 @@ class NHANVIEN
         return json_encode($data);
     }
 }
-
-?>
